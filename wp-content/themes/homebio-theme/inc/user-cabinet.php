@@ -10,34 +10,11 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Restrict cabinet access to logged-in users
+ * Get the cabinet URL
  */
-function homebio_restrict_cabinet_access() {
-    // Get cabinet page slug
-    $cabinet_slugs = ['user-cabinet', 'my-cabinet', 'cabinet'];
-
-    if (is_page($cabinet_slugs) && !is_user_logged_in()) {
-        $redirect_url = add_query_arg(
-            'redirect_to',
-            urlencode($_SERVER['REQUEST_URI']),
-            home_url('/login')
-        );
-        wp_redirect($redirect_url);
-        exit;
-    }
+function homebio_get_cabinet_url() {
+    return home_url('/user-cabinet/');
 }
-add_action('template_redirect', 'homebio_restrict_cabinet_access');
-
-/**
- * Redirect logged-in users away from login page
- */
-function homebio_redirect_logged_in_users() {
-    if (is_page('login') && is_user_logged_in()) {
-        wp_redirect(home_url('/user-cabinet'));
-        exit;
-    }
-}
-add_action('template_redirect', 'homebio_redirect_logged_in_users');
 
 /**
  * Custom login redirect
@@ -53,7 +30,7 @@ function homebio_login_redirect($redirect_to, $request, $user) {
         if (in_array('administrator', $user->roles)) {
             return admin_url();
         }
-        return home_url('/user-cabinet');
+        return homebio_get_cabinet_url();
     }
 
     return $redirect_to;
@@ -96,37 +73,119 @@ function homebio_apply_user_language($user_login, $user) {
 add_action('wp_login', 'homebio_apply_user_language', 10, 2);
 
 /**
- * Language switcher output
+ * AJAX handler for updating user settings
  */
-function homebio_language_switcher() {
-    // This will be populated when WPML or Polylang is installed
-    // For now, output a placeholder
+function homebio_ajax_update_settings() {
+    // Verify nonce - accept either form nonce or global nonce
+    $nonce_valid = false;
 
-    $languages = [
-        'en_US' => 'EN',
-        'bg_BG' => 'BG',
-        'ru_RU' => 'RU',
-        'uk'    => 'UA',
-    ];
+    if (isset($_POST['cabinet_nonce']) && wp_verify_nonce($_POST['cabinet_nonce'], 'homebio_cabinet_nonce')) {
+        $nonce_valid = true;
+    } elseif (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'homebio_nonce')) {
+        $nonce_valid = true;
+    }
 
-    $current_lang = get_locale();
-    ?>
-    <div class="language-switcher">
-        <select id="language-selector" class="language-select">
-            <?php foreach ($languages as $code => $label) : ?>
-                <option value="<?php echo esc_attr($code); ?>" <?php selected($current_lang, $code); ?>>
-                    <?php echo esc_html($label); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-    <?php
+    if (!$nonce_valid) {
+        wp_send_json_error(['message' => __('Security check failed', 'homebio')]);
+    }
+
+    // Check if user is logged in
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => __('Please log in', 'homebio')]);
+    }
+
+    $user_id = get_current_user_id();
+
+    // Update first name
+    if (isset($_POST['first_name'])) {
+        update_user_meta($user_id, 'first_name', sanitize_text_field($_POST['first_name']));
+    }
+
+    // Update last name
+    if (isset($_POST['last_name'])) {
+        update_user_meta($user_id, 'last_name', sanitize_text_field($_POST['last_name']));
+    }
+
+    // Update phone
+    if (isset($_POST['phone'])) {
+        update_user_meta($user_id, 'phone', sanitize_text_field($_POST['phone']));
+    }
+
+    // Update birth date
+    if (isset($_POST['birth_date'])) {
+        update_user_meta($user_id, 'birth_date', sanitize_text_field($_POST['birth_date']));
+    }
+
+    // Update display name
+    $first_name = get_user_meta($user_id, 'first_name', true);
+    $last_name = get_user_meta($user_id, 'last_name', true);
+    if ($first_name || $last_name) {
+        wp_update_user([
+            'ID' => $user_id,
+            'display_name' => trim($first_name . ' ' . $last_name),
+        ]);
+    }
+
+    wp_send_json_success(['message' => __('Settings saved successfully', 'homebio')]);
 }
+add_action('wp_ajax_update_settings', 'homebio_ajax_update_settings');
 
 /**
- * AJAX handler for updating user profile
+ * AJAX handler for changing password
  */
-function homebio_ajax_update_profile() {
+function homebio_ajax_change_password() {
+    // Verify nonce - accept either form nonce or global nonce
+    $nonce_valid = false;
+
+    if (isset($_POST['password_nonce']) && wp_verify_nonce($_POST['password_nonce'], 'homebio_password_nonce')) {
+        $nonce_valid = true;
+    } elseif (isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'homebio_nonce')) {
+        $nonce_valid = true;
+    }
+
+    if (!$nonce_valid) {
+        wp_send_json_error(['message' => __('Security check failed', 'homebio')]);
+    }
+
+    // Check if user is logged in
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => __('Please log in', 'homebio')]);
+    }
+
+    $user = wp_get_current_user();
+    $current_password = isset($_POST['current_password']) ? $_POST['current_password'] : '';
+    $new_password = isset($_POST['new_password']) ? $_POST['new_password'] : '';
+    $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
+
+    // Verify current password
+    if (!wp_check_password($current_password, $user->user_pass, $user->ID)) {
+        wp_send_json_error(['message' => __('Current password is incorrect', 'homebio')]);
+    }
+
+    // Check new password length
+    if (strlen($new_password) < 8) {
+        wp_send_json_error(['message' => __('New password must be at least 8 characters', 'homebio')]);
+    }
+
+    // Check passwords match
+    if ($new_password !== $confirm_password) {
+        wp_send_json_error(['message' => __('Passwords do not match', 'homebio')]);
+    }
+
+    // Update password
+    wp_set_password($new_password, $user->ID);
+
+    // Re-authenticate user
+    wp_set_auth_cookie($user->ID);
+
+    wp_send_json_success(['message' => __('Password changed successfully', 'homebio')]);
+}
+add_action('wp_ajax_change_password', 'homebio_ajax_change_password');
+
+/**
+ * AJAX handler for deleting account
+ */
+function homebio_ajax_delete_account() {
     // Verify nonce
     if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'homebio_nonce')) {
         wp_send_json_error(['message' => __('Security check failed', 'homebio')]);
@@ -138,245 +197,396 @@ function homebio_ajax_update_profile() {
     }
 
     $user_id = get_current_user_id();
-    $errors = [];
+    $user = get_userdata($user_id);
 
-    // Update first name
-    if (isset($_POST['first_name'])) {
-        $first_name = sanitize_text_field($_POST['first_name']);
-        update_user_meta($user_id, 'first_name', $first_name);
+    // Don't allow admins to delete themselves
+    if (in_array('administrator', $user->roles)) {
+        wp_send_json_error(['message' => __('Administrators cannot delete their account this way', 'homebio')]);
     }
 
-    // Update last name
-    if (isset($_POST['last_name'])) {
-        $last_name = sanitize_text_field($_POST['last_name']);
-        update_user_meta($user_id, 'last_name', $last_name);
-    }
+    // Delete user favorites
+    delete_user_meta($user_id, 'homebio_favorites');
 
-    // Update phone
-    if (isset($_POST['phone'])) {
-        $phone = sanitize_text_field($_POST['phone']);
-        update_user_meta($user_id, 'phone', $phone);
-    }
+    // Delete user
+    require_once(ABSPATH . 'wp-admin/includes/user.php');
+    $deleted = wp_delete_user($user_id);
 
-    // Update language preference
-    if (isset($_POST['language'])) {
-        homebio_save_user_language($user_id, $_POST['language']);
-    }
-
-    if (empty($errors)) {
-        wp_send_json_success(['message' => __('Profile updated successfully', 'homebio')]);
+    if ($deleted) {
+        wp_send_json_success([
+            'message' => __('Account deleted successfully', 'homebio'),
+            'redirect' => home_url()
+        ]);
     } else {
-        wp_send_json_error(['message' => implode(', ', $errors)]);
+        wp_send_json_error(['message' => __('Failed to delete account', 'homebio')]);
     }
 }
-add_action('wp_ajax_update_profile', 'homebio_ajax_update_profile');
+add_action('wp_ajax_delete_account', 'homebio_ajax_delete_account');
 
 /**
- * Get cabinet navigation items
+ * AJAX handler for removing favorite from cabinet
  */
-function homebio_get_cabinet_nav() {
-    return [
-        'profile' => [
-            'label' => __('Personal Info', 'homebio'),
-            'icon'  => 'dashicons-admin-users',
-            'slug'  => 'profile',
-        ],
-        'security' => [
-            'label' => __('Security', 'homebio'),
-            'icon'  => 'dashicons-shield',
-            'slug'  => 'security',
-        ],
-        'language' => [
-            'label' => __('Language', 'homebio'),
-            'icon'  => 'dashicons-translation',
-            'slug'  => 'language',
-        ],
-        'favorites' => [
-            'label' => __('Favorites', 'homebio'),
-            'icon'  => 'dashicons-heart',
-            'slug'  => 'favorites',
-            'count' => homebio_get_favorites_count(),
+function homebio_ajax_remove_favorite() {
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'homebio_nonce')) {
+        wp_send_json_error(['message' => __('Security check failed', 'homebio')]);
+    }
+
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => __('Please log in', 'homebio')]);
+    }
+
+    $property_id = isset($_POST['property_id']) ? intval($_POST['property_id']) : 0;
+
+    if (!$property_id) {
+        wp_send_json_error(['message' => __('Invalid property', 'homebio')]);
+    }
+
+    $user_id = get_current_user_id();
+
+    // Use the existing helper function to remove favorite
+    homebio_remove_favorite($property_id, $user_id);
+
+    // Get updated count
+    $count = homebio_get_favorites_count($user_id);
+
+    wp_send_json_success([
+        'message' => __('Removed from favorites', 'homebio'),
+        'count' => $count
+    ]);
+}
+add_action('wp_ajax_remove_favorite', 'homebio_ajax_remove_favorite');
+
+/**
+ * AJAX handler for avatar upload
+ */
+function homebio_ajax_upload_avatar() {
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'homebio_nonce')) {
+        wp_send_json_error(['message' => __('Security check failed', 'homebio')]);
+    }
+
+    // Check user is logged in
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => __('Please log in', 'homebio')]);
+    }
+
+    // Check for file
+    if (empty($_FILES['avatar']) || $_FILES['avatar']['error'] !== UPLOAD_ERR_OK) {
+        $error_message = __('No file uploaded', 'homebio');
+        if (!empty($_FILES['avatar']['error'])) {
+            $upload_errors = [
+                UPLOAD_ERR_INI_SIZE => 'File exceeds server limit',
+                UPLOAD_ERR_FORM_SIZE => 'File exceeds form limit',
+                UPLOAD_ERR_PARTIAL => 'File only partially uploaded',
+                UPLOAD_ERR_NO_FILE => 'No file was uploaded',
+                UPLOAD_ERR_NO_TMP_DIR => 'Missing temp folder',
+                UPLOAD_ERR_CANT_WRITE => 'Failed to write file',
+            ];
+            $error_code = $_FILES['avatar']['error'];
+            if (isset($upload_errors[$error_code])) {
+                $error_message = $upload_errors[$error_code];
+            }
+        }
+        wp_send_json_error(['message' => $error_message]);
+    }
+
+    $file = $_FILES['avatar'];
+
+    // Validate file type using both mime type and extension
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+    $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+    if (!in_array($file['type'], $allowed_types) || !in_array($file_extension, $allowed_extensions)) {
+        wp_send_json_error(['message' => __('Invalid file type. Please upload JPG, PNG, GIF, or WebP.', 'homebio')]);
+    }
+
+    // Validate file size (2MB)
+    if ($file['size'] > 2 * 1024 * 1024) {
+        wp_send_json_error(['message' => __('File too large. Maximum size is 2MB.', 'homebio')]);
+    }
+
+    // Load WordPress media functions
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+    require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+    $user_id = get_current_user_id();
+
+    // Delete old avatar if exists
+    $old_avatar_id = get_user_meta($user_id, 'homebio_custom_avatar_id', true);
+    if ($old_avatar_id) {
+        wp_delete_attachment($old_avatar_id, true);
+    }
+
+    // Use wp_handle_upload directly for better AJAX compatibility
+    $upload_overrides = [
+        'test_form' => false,
+        'test_type' => true,
+        'mimes' => [
+            'jpg|jpeg|jpe' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
         ],
     ];
+
+    $uploaded_file = wp_handle_upload($file, $upload_overrides);
+
+    if (isset($uploaded_file['error'])) {
+        wp_send_json_error(['message' => $uploaded_file['error']]);
+    }
+
+    // Create attachment
+    $attachment = [
+        'post_mime_type' => $uploaded_file['type'],
+        'post_title' => sanitize_file_name(pathinfo($uploaded_file['file'], PATHINFO_FILENAME)),
+        'post_content' => '',
+        'post_status' => 'inherit',
+        'post_author' => $user_id,
+    ];
+
+    $attachment_id = wp_insert_attachment($attachment, $uploaded_file['file']);
+
+    if (is_wp_error($attachment_id)) {
+        wp_send_json_error(['message' => $attachment_id->get_error_message()]);
+    }
+
+    // Generate attachment metadata
+    $attachment_data = wp_generate_attachment_metadata($attachment_id, $uploaded_file['file']);
+    wp_update_attachment_metadata($attachment_id, $attachment_data);
+
+    // Get the attachment URL
+    $avatar_url = wp_get_attachment_image_url($attachment_id, 'thumbnail');
+
+    if (!$avatar_url) {
+        $avatar_url = $uploaded_file['url'];
+    }
+
+    // Save avatar meta
+    $url_updated = update_user_meta($user_id, 'homebio_custom_avatar', $avatar_url);
+    $id_updated = update_user_meta($user_id, 'homebio_custom_avatar_id', $attachment_id);
+
+    // Add timestamp for cache busting
+    update_user_meta($user_id, 'homebio_avatar_updated', time());
+
+    // Clear user meta cache to ensure fresh data on next page load
+    wp_cache_delete($user_id, 'user_meta');
+    clean_user_cache($user_id);
+
+    // Verify the meta was saved
+    $saved_url = get_user_meta($user_id, 'homebio_custom_avatar', true);
+    $saved_id = get_user_meta($user_id, 'homebio_custom_avatar_id', true);
+
+    wp_send_json_success([
+        'message' => __('Avatar updated successfully', 'homebio'),
+        'avatar_url' => $avatar_url,
+        'attachment_id' => $attachment_id,
+        'saved_url' => $saved_url,
+        'saved_id' => $saved_id,
+        'debug' => [
+            'url_updated' => $url_updated,
+            'id_updated' => $id_updated,
+            'user_id' => $user_id,
+        ]
+    ]);
+}
+add_action('wp_ajax_upload_avatar', 'homebio_ajax_upload_avatar');
+
+/**
+ * AJAX handler for removing avatar
+ */
+function homebio_ajax_remove_avatar() {
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'homebio_nonce')) {
+        wp_send_json_error(['message' => __('Security check failed', 'homebio')]);
+    }
+
+    // Check user is logged in
+    if (!is_user_logged_in()) {
+        wp_send_json_error(['message' => __('Please log in', 'homebio')]);
+    }
+
+    $user_id = get_current_user_id();
+
+    // Delete avatar attachment
+    $avatar_id = get_user_meta($user_id, 'homebio_custom_avatar_id', true);
+    if ($avatar_id) {
+        wp_delete_attachment($avatar_id, true);
+    }
+
+    // Remove meta
+    delete_user_meta($user_id, 'homebio_custom_avatar');
+    delete_user_meta($user_id, 'homebio_custom_avatar_id');
+
+    // Get default gravatar URL
+    $default_avatar = get_avatar_url($user_id, ['size' => 120]);
+
+    wp_send_json_success([
+        'message' => __('Avatar removed', 'homebio'),
+        'avatar_url' => $default_avatar
+    ]);
+}
+add_action('wp_ajax_remove_avatar', 'homebio_ajax_remove_avatar');
+
+/**
+ * Get user ID from various input types
+ */
+function homebio_get_user_id_from_input($id_or_email) {
+    $user_id = null;
+
+    if (is_numeric($id_or_email)) {
+        $user_id = (int) $id_or_email;
+    } elseif ($id_or_email instanceof WP_User) {
+        $user_id = $id_or_email->ID;
+    } elseif (is_object($id_or_email)) {
+        if (!empty($id_or_email->user_id)) {
+            $user_id = (int) $id_or_email->user_id;
+        } elseif (!empty($id_or_email->ID)) {
+            $user_id = (int) $id_or_email->ID;
+        } elseif (!empty($id_or_email->comment_author_email)) {
+            $user = get_user_by('email', $id_or_email->comment_author_email);
+            if ($user) {
+                $user_id = $user->ID;
+            }
+        }
+    } elseif (is_string($id_or_email)) {
+        if (is_email($id_or_email)) {
+            $user = get_user_by('email', $id_or_email);
+            if ($user) {
+                $user_id = $user->ID;
+            }
+        }
+    }
+
+    return $user_id;
 }
 
 /**
- * User cabinet shortcode
+ * Get avatar HTML for user (direct function, bypasses WordPress filters)
+ * Use this as fallback if get_avatar() doesn't work correctly
  */
-function homebio_cabinet_shortcode($atts) {
-    if (!is_user_logged_in()) {
+function homebio_get_avatar($user_id, $size = 96, $alt = '') {
+    $custom_url = homebio_get_custom_avatar_url($user_id);
+
+    if ($custom_url) {
         return sprintf(
-            '<p>%s <a href="%s">%s</a></p>',
-            esc_html__('Please', 'homebio'),
-            esc_url(home_url('/login')),
-            esc_html__('log in', 'homebio')
+            '<img alt="%s" src="%s" class="avatar avatar-%d photo" height="%d" width="%d" loading="lazy" />',
+            esc_attr($alt),
+            esc_url($custom_url),
+            (int) $size,
+            (int) $size,
+            (int) $size
         );
     }
 
-    $current_user = wp_get_current_user();
-    $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'profile';
-    $nav_items = homebio_get_cabinet_nav();
-
-    ob_start();
-    ?>
-    <div class="user-cabinet">
-        <nav class="cabinet-nav">
-            <ul>
-                <?php foreach ($nav_items as $key => $item) : ?>
-                    <li class="<?php echo $active_tab === $item['slug'] ? 'active' : ''; ?>">
-                        <a href="?tab=<?php echo esc_attr($item['slug']); ?>">
-                            <span class="dashicons <?php echo esc_attr($item['icon']); ?>"></span>
-                            <?php echo esc_html($item['label']); ?>
-                            <?php if (isset($item['count']) && $item['count'] > 0) : ?>
-                                <span class="count"><?php echo intval($item['count']); ?></span>
-                            <?php endif; ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
-
-        <div class="cabinet-content">
-            <?php
-            switch ($active_tab) {
-                case 'security':
-                    homebio_cabinet_security_tab($current_user);
-                    break;
-                case 'language':
-                    homebio_cabinet_language_tab($current_user);
-                    break;
-                case 'favorites':
-                    homebio_cabinet_favorites_tab($current_user);
-                    break;
-                default:
-                    homebio_cabinet_profile_tab($current_user);
-                    break;
-            }
-            ?>
-        </div>
-    </div>
-    <?php
-    return ob_get_clean();
-}
-add_shortcode('user_cabinet', 'homebio_cabinet_shortcode');
-
-/**
- * Profile tab content
- */
-function homebio_cabinet_profile_tab($user) {
-    ?>
-    <h2><?php esc_html_e('Personal Information', 'homebio'); ?></h2>
-    <form id="profile-form" class="cabinet-form">
-        <div class="form-group">
-            <label for="first_name"><?php esc_html_e('First Name', 'homebio'); ?></label>
-            <input type="text" id="first_name" name="first_name"
-                   value="<?php echo esc_attr($user->first_name); ?>">
-        </div>
-        <div class="form-group">
-            <label for="last_name"><?php esc_html_e('Last Name', 'homebio'); ?></label>
-            <input type="text" id="last_name" name="last_name"
-                   value="<?php echo esc_attr($user->last_name); ?>">
-        </div>
-        <div class="form-group">
-            <label for="email"><?php esc_html_e('Email', 'homebio'); ?></label>
-            <input type="email" id="email" name="email"
-                   value="<?php echo esc_attr($user->user_email); ?>" readonly>
-            <small><?php esc_html_e('Email is managed by your Google account', 'homebio'); ?></small>
-        </div>
-        <div class="form-group">
-            <label for="phone"><?php esc_html_e('Phone Number', 'homebio'); ?></label>
-            <input type="tel" id="phone" name="phone"
-                   value="<?php echo esc_attr(get_user_meta($user->ID, 'phone', true)); ?>">
-        </div>
-        <button type="submit" class="btn btn-primary">
-            <?php esc_html_e('Save Changes', 'homebio'); ?>
-        </button>
-    </form>
-    <?php
+    // Fall back to WordPress default
+    return get_avatar($user_id, $size, '', $alt);
 }
 
 /**
- * Security tab content
+ * Get custom avatar URL for user
  */
-function homebio_cabinet_security_tab($user) {
-    ?>
-    <h2><?php esc_html_e('Security Settings', 'homebio'); ?></h2>
-    <div class="security-section">
-        <h3><?php esc_html_e('Connected Accounts', 'homebio'); ?></h3>
-        <div class="connected-account">
-            <span class="account-icon google"></span>
-            <span class="account-info">
-                <strong>Google</strong>
-                <span><?php echo esc_html($user->user_email); ?></span>
-            </span>
-            <span class="account-status connected">
-                <?php esc_html_e('Connected', 'homebio'); ?>
-            </span>
-        </div>
-    </div>
-    <div class="security-section">
-        <h3><?php esc_html_e('Delete Account', 'homebio'); ?></h3>
-        <p><?php esc_html_e('Once you delete your account, there is no going back. Please be certain.', 'homebio'); ?></p>
-        <button class="btn btn-danger" id="delete-account-btn">
-            <?php esc_html_e('Delete Account', 'homebio'); ?>
-        </button>
-    </div>
-    <?php
+function homebio_get_custom_avatar_url($user_id) {
+    if (!$user_id) {
+        return false;
+    }
+
+    $avatar_id = get_user_meta($user_id, 'homebio_custom_avatar_id', true);
+
+    // Cast to int and validate
+    if (empty($avatar_id)) {
+        return false;
+    }
+    $avatar_id = absint($avatar_id);
+
+    if ($avatar_id <= 0) {
+        return false;
+    }
+
+    // Verify attachment exists
+    if (get_post_type($avatar_id) !== 'attachment') {
+        return false;
+    }
+
+    // Try thumbnail first
+    $url = wp_get_attachment_image_url($avatar_id, 'thumbnail');
+
+    // Fallback to full size
+    if (!$url) {
+        $url = wp_get_attachment_url($avatar_id);
+    }
+
+    // Fallback to stored URL
+    if (!$url) {
+        $url = get_user_meta($user_id, 'homebio_custom_avatar', true);
+    }
+
+    // Add cache buster
+    if ($url) {
+        $separator = (strpos($url, '?') !== false) ? '&' : '?';
+        $url .= $separator . 'v=' . get_user_meta($user_id, 'homebio_avatar_updated', true);
+    }
+
+    return $url;
 }
 
 /**
- * Language tab content
+ * Filter avatar data before avatar is generated (most reliable method)
+ * Priority 1 ensures this runs before other plugins
  */
-function homebio_cabinet_language_tab($user) {
-    $current_language = homebio_get_user_language($user->ID);
-    $languages = [
-        'en_US' => __('English', 'homebio'),
-        'bg_BG' => __('Bulgarian', 'homebio'),
-        'ru_RU' => __('Russian', 'homebio'),
-        'uk'    => __('Ukrainian', 'homebio'),
-    ];
-    ?>
-    <h2><?php esc_html_e('Language Preferences', 'homebio'); ?></h2>
-    <form id="language-form" class="cabinet-form">
-        <div class="form-group">
-            <label for="language"><?php esc_html_e('Preferred Language', 'homebio'); ?></label>
-            <select id="language" name="language">
-                <?php foreach ($languages as $code => $label) : ?>
-                    <option value="<?php echo esc_attr($code); ?>" <?php selected($current_language, $code); ?>>
-                        <?php echo esc_html($label); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">
-            <?php esc_html_e('Save Preference', 'homebio'); ?>
-        </button>
-    </form>
-    <?php
+function homebio_pre_get_avatar_data($args, $id_or_email) {
+    // Prevent recursion
+    static $is_checking = false;
+    if ($is_checking) {
+        return $args;
+    }
+    $is_checking = true;
+
+    $user_id = homebio_get_user_id_from_input($id_or_email);
+
+    if ($user_id) {
+        $custom_url = homebio_get_custom_avatar_url($user_id);
+
+        if ($custom_url) {
+            $args['url'] = $custom_url;
+            $args['found_avatar'] = true;
+        }
+    }
+
+    $is_checking = false;
+    return $args;
 }
+add_filter('pre_get_avatar_data', 'homebio_pre_get_avatar_data', 1, 2);
 
 /**
- * Favorites tab content
+ * Override default avatar with custom uploaded avatar (backup filter)
  */
-function homebio_cabinet_favorites_tab($user) {
-    $favorites_query = homebio_get_favorite_properties($user->ID);
-    ?>
-    <h2><?php esc_html_e('My Favorites', 'homebio'); ?></h2>
+function homebio_custom_avatar($avatar, $id_or_email, $size, $default, $alt, $args) {
+    $user_id = homebio_get_user_id_from_input($id_or_email);
 
-    <?php if ($favorites_query->have_posts()) : ?>
-        <div class="properties-grid">
-            <?php while ($favorites_query->have_posts()) : $favorites_query->the_post(); ?>
-                <?php get_template_part('template-parts/property', 'card'); ?>
-            <?php endwhile; ?>
-        </div>
-        <?php wp_reset_postdata(); ?>
-    <?php else : ?>
-        <div class="no-favorites">
-            <p><?php esc_html_e('You haven\'t saved any properties yet.', 'homebio'); ?></p>
-            <a href="<?php echo esc_url(get_post_type_archive_link('property')); ?>" class="btn btn-primary">
-                <?php esc_html_e('Browse Properties', 'homebio'); ?>
-            </a>
-        </div>
-    <?php endif; ?>
-    <?php
+    if (!$user_id) {
+        return $avatar;
+    }
+
+    $custom_avatar_url = homebio_get_custom_avatar_url($user_id);
+
+    if ($custom_avatar_url) {
+        $class = isset($args['class']) ? $args['class'] : 'avatar';
+        if (is_array($class)) {
+            $class = implode(' ', $class);
+        }
+        $avatar = sprintf(
+            '<img alt="%s" src="%s" class="%s" height="%d" width="%d" loading="lazy" />',
+            esc_attr($alt),
+            esc_url($custom_avatar_url),
+            esc_attr($class . ' avatar-' . $size . ' photo'),
+            (int) $size,
+            (int) $size
+        );
+    }
+
+    return $avatar;
 }
+add_filter('get_avatar', 'homebio_custom_avatar', 99, 6);

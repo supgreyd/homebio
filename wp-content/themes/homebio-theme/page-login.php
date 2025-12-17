@@ -9,12 +9,13 @@
 
 // Redirect logged-in users to cabinet
 if (is_user_logged_in()) {
-    wp_redirect(home_url('/user-cabinet'));
+    wp_safe_redirect(home_url('/user-cabinet/'));
     exit;
 }
 
 // Get redirect URL if set
-$redirect_to = isset($_GET['redirect_to']) ? esc_url($_GET['redirect_to']) : home_url('/user-cabinet');
+$default_redirect = home_url('/user-cabinet/');
+$redirect_to = isset($_GET['redirect_to']) ? esc_url($_GET['redirect_to']) : $default_redirect;
 
 get_header();
 ?>
@@ -35,7 +36,11 @@ get_header();
                             <?php
                             // Nextend Social Login shortcode
                             if (shortcode_exists('nextend_social_login')) {
-                                echo do_shortcode('[nextend_social_login provider="google" redirect="' . esc_attr($redirect_to) . '"]');
+                                // Store redirect_to in session for after OAuth
+                                if (!empty($_GET['redirect_to'])) {
+                                    set_transient('homebio_oauth_redirect_' . wp_get_session_token(), esc_url($_GET['redirect_to']), 300);
+                                }
+                                echo do_shortcode('[nextend_social_login provider="google"]');
                             } else {
                                 // Fallback if plugin not configured
                                 ?>

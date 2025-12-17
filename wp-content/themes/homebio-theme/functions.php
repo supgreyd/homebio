@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 /**
  * Define theme constants
  */
-define('HOMEBIO_VERSION', '1.0.0');
+define('HOMEBIO_VERSION', '1.0.15');
 define('HOMEBIO_DIR', get_template_directory());
 define('HOMEBIO_URI', get_template_directory_uri());
 
@@ -145,6 +145,8 @@ require_once HOMEBIO_DIR . '/inc/custom-post-types.php';
 require_once HOMEBIO_DIR . '/inc/favorites.php';
 require_once HOMEBIO_DIR . '/inc/user-cabinet.php';
 require_once HOMEBIO_DIR . '/inc/oauth-integration.php';
+require_once HOMEBIO_DIR . '/inc/ultimate-member-integration.php';
+require_once HOMEBIO_DIR . '/inc/polylang-integration.php';
 
 /**
  * Custom excerpt length
@@ -161,3 +163,15 @@ function homebio_excerpt_more($more) {
     return '...';
 }
 add_filter('excerpt_more', 'homebio_excerpt_more');
+
+/**
+ * Fallback menu when no menu is assigned
+ */
+function homebio_fallback_menu() {
+    ?>
+    <ul id="primary-menu" class="menu">
+        <li><a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'homebio'); ?></a></li>
+        <li><a href="<?php echo esc_url(get_post_type_archive_link('property')); ?>"><?php esc_html_e('Properties', 'homebio'); ?></a></li>
+    </ul>
+    <?php
+}

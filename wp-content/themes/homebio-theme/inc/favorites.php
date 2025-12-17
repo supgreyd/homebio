@@ -127,8 +127,12 @@ function homebio_ajax_toggle_favorite() {
     // Toggle favorite
     $is_favorite = homebio_toggle_favorite($property_id);
 
+    // Get updated count
+    $favorites_count = homebio_get_favorites_count();
+
     wp_send_json_success([
         'is_favorite' => $is_favorite,
+        'count'       => $favorites_count,
         'message'     => $is_favorite
             ? __('Added to favorites', 'homebio')
             : __('Removed from favorites', 'homebio'),

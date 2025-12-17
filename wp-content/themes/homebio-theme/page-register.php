@@ -9,7 +9,7 @@
 
 // Redirect logged-in users to cabinet
 if (is_user_logged_in()) {
-    wp_redirect(home_url('/user-cabinet'));
+    wp_safe_redirect(home_url('/user-cabinet/'));
     exit;
 }
 
@@ -20,7 +20,8 @@ if (!get_option('users_can_register')) {
 }
 
 // Get redirect URL if set
-$redirect_to = isset($_GET['redirect_to']) ? esc_url($_GET['redirect_to']) : home_url('/user-cabinet');
+$default_redirect = home_url('/user-cabinet/');
+$redirect_to = isset($_GET['redirect_to']) ? esc_url($_GET['redirect_to']) : $default_redirect;
 
 // Handle form submission
 $errors = [];

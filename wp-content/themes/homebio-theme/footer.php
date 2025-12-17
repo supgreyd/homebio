@@ -17,10 +17,10 @@
                 <h4><?php esc_html_e('Navigation', 'homebio'); ?></h4>
                 <?php
                 wp_nav_menu([
-                    'theme_location' => 'footer',
+                    'theme_location' => 'primary',
                     'menu_id'        => 'footer-menu',
                     'container'      => false,
-                    'fallback_cb'    => false,
+                    'fallback_cb'    => 'homebio_fallback_menu',
                     'depth'          => 1,
                 ]);
                 ?>

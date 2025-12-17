@@ -55,7 +55,7 @@ add_action('nsl_register_new_user', 'homebio_send_welcome_email', 20);
 function homebio_get_welcome_email_content($user) {
     $site_name = get_bloginfo('name');
     $site_url = home_url();
-    $cabinet_url = home_url('/user-cabinet');
+    $cabinet_url = function_exists('homebio_get_profile_url') ? homebio_get_profile_url() : home_url('/user/');
     $properties_url = get_post_type_archive_link('property');
     $first_name = $user->first_name ?: $user->display_name;
 
@@ -157,30 +157,45 @@ function homebio_get_welcome_email_content($user) {
 }
 
 /**
- * Redirect to custom login page instead of wp-login.php
+ * Redirect wp-login.php to custom login page
+ * Only redirects wp-login.php, not our custom /login page
  */
 function homebio_redirect_login_page() {
-    $login_page = home_url('/login');
-    $page_viewed = basename($_SERVER['REQUEST_URI']);
+    $page_viewed = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
-    if ($page_viewed === 'wp-login.php' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-        // Check for specific actions that should use wp-login.php
-        if (isset($_GET['action'])) {
-            $allowed_actions = ['logout', 'lostpassword', 'rp', 'resetpass'];
-            if (in_array($_GET['action'], $allowed_actions)) {
-                return;
-            }
-        }
-
-        $redirect_to = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : '';
-
-        if ($redirect_to) {
-            wp_redirect(add_query_arg('redirect_to', urlencode($redirect_to), $login_page));
-        } else {
-            wp_redirect($login_page);
-        }
-        exit;
+    // Only redirect wp-login.php
+    if ($page_viewed !== 'wp-login.php') {
+        return;
     }
+
+    // Only redirect GET requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        return;
+    }
+
+    // Allow Nextend Social Login OAuth callback
+    if (isset($_GET['loginSocial'])) {
+        return;
+    }
+
+    // Allow specific wp-login.php actions
+    if (isset($_GET['action'])) {
+        $allowed_actions = ['logout', 'lostpassword', 'rp', 'resetpass', 'postpass'];
+        if (in_array($_GET['action'], $allowed_actions)) {
+            return;
+        }
+    }
+
+    // Redirect to custom login page
+    $login_page = home_url('/login');
+    $redirect_to = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : '';
+
+    if ($redirect_to) {
+        $login_page = add_query_arg('redirect_to', urlencode($redirect_to), $login_page);
+    }
+
+    wp_redirect($login_page);
+    exit;
 }
 add_action('init', 'homebio_redirect_login_page');
 
@@ -228,6 +243,44 @@ function homebio_store_oauth_provider($user_id, $provider) {
 add_action('nsl_register_new_user', function($user_id) {
     homebio_store_oauth_provider($user_id, 'google');
 }, 10);
+
+/**
+ * Get the user profile/cabinet URL
+ */
+function homebio_get_profile_url($user_id = null) {
+    // Use our custom cabinet page
+    return home_url('/user-cabinet/');
+}
+
+/**
+ * Nextend Social Login - Custom redirect after login
+ */
+function homebio_nsl_login_redirect($redirect_to, $user) {
+    // Check for stored redirect in transient (set on login page)
+    $transient_key = 'homebio_oauth_redirect_' . wp_get_session_token();
+    $stored_redirect = get_transient($transient_key);
+
+    if ($stored_redirect) {
+        delete_transient($transient_key);
+        return $stored_redirect;
+    }
+
+    // If redirect_to is set and not login page, use it
+    if (!empty($redirect_to) && strpos($redirect_to, '/login') === false && $redirect_to !== home_url('/')) {
+        return $redirect_to;
+    }
+
+    return homebio_get_profile_url();
+}
+add_filter('nsl_login_redirect', 'homebio_nsl_login_redirect', 10, 2);
+
+/**
+ * Nextend Social Login - Custom redirect after registration
+ */
+function homebio_nsl_register_redirect($redirect_to, $user) {
+    return homebio_get_profile_url();
+}
+add_filter('nsl_registration_redirect', 'homebio_nsl_register_redirect', 10, 2);
 
 /**
  * Check if user registered via OAuth
