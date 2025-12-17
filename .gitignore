@@ -1,0 +1,72 @@
+# WordPress Core (if included)
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/index.php
+/license.txt
+/readme.html
+/xmlrpc.php
+
+# WordPress Content
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/backup-db/
+/wp-content/advanced-cache.php
+/wp-content/wp-cache-config.php
+/wp-content/cache/
+/wp-content/backups/
+
+# Plugins (managed via composer or manually)
+/wp-content/plugins/
+
+# Other themes (keep only our custom theme)
+/wp-content/themes/twenty*/
+
+# Configuration
+wp-config.php
+wp-config-local.php
+.htaccess
+
+# Local development
+*.local
+*.log
+error_log
+debug.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Composer
+vendor/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.map
+*.min.js
+*.min.css
+
+# Backup files
+*.bak
+*.backup
