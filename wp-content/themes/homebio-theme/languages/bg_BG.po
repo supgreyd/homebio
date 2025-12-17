@@ -1,0 +1,525 @@
+# Bulgarian Translation for HomeBio Theme
+# Copyright (C) 2024 HomeBio Team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: HomeBio 1.0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-17 12:00+0000\n"
+"PO-Revision-Date: 2024-12-17 12:00+0000\n"
+"Last-Translator: HomeBio Team\n"
+"Language-Team: Bulgarian\n"
+"Language: bg_BG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: HomeBio Theme\n"
+"X-Domain: homebio\n"
+
+#: Navigation
+msgid "Home"
+msgstr "Начало"
+
+msgid "Properties"
+msgstr "Имоти"
+
+msgid "Login"
+msgstr "Вход"
+
+msgid "Sign Up"
+msgstr "Регистрация"
+
+msgid "Logout"
+msgstr "Изход"
+
+msgid "My Cabinet"
+msgstr "Моят профил"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Skip to content"
+msgstr "Към съдържанието"
+
+msgid "Primary Menu"
+msgstr "Главно меню"
+
+msgid "Footer Menu"
+msgstr "Меню в долната част"
+
+#: User Cabinet
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Security"
+msgstr "Сигурност"
+
+msgid "Favorites"
+msgstr "Любими"
+
+msgid "Profile Settings"
+msgstr "Настройки на профила"
+
+msgid "Manage your personal information"
+msgstr "Управлявайте личната си информация"
+
+msgid "Profile Photo"
+msgstr "Профилна снимка"
+
+msgid "Upload a photo to personalize your profile."
+msgstr "Качете снимка, за да персонализирате профила си."
+
+msgid "Upload Photo"
+msgstr "Качи снимка"
+
+msgid "Remove"
+msgstr "Премахни"
+
+msgid "JPG, PNG, GIF or WebP. Max 2MB."
+msgstr "JPG, PNG, GIF или WebP. Макс. 2MB."
+
+msgid "First Name"
+msgstr "Име"
+
+msgid "Last Name"
+msgstr "Фамилия"
+
+msgid "Email Address"
+msgstr "Имейл адрес"
+
+msgid "Email is managed by your Google account"
+msgstr "Имейлът се управлява от вашия Google акаунт"
+
+msgid "Phone Number"
+msgstr "Телефонен номер"
+
+msgid "Date of Birth"
+msgstr "Дата на раждане"
+
+msgid "Save Changes"
+msgstr "Запази промените"
+
+msgid "Settings saved successfully"
+msgstr "Настройките са запазени успешно"
+
+#: Security Tab
+msgid "Manage your account security settings"
+msgstr "Управлявайте настройките за сигурност на акаунта"
+
+msgid "Google Account"
+msgstr "Google акаунт"
+
+msgid "Your account is connected to Google. Password is managed through your Google account."
+msgstr "Вашият акаунт е свързан с Google. Паролата се управлява чрез Google акаунта ви."
+
+msgid "Connected"
+msgstr "Свързан"
+
+msgid "Change Password"
+msgstr "Промяна на парола"
+
+msgid "Current Password"
+msgstr "Текуща парола"
+
+msgid "New Password"
+msgstr "Нова парола"
+
+msgid "Confirm New Password"
+msgstr "Потвърдете новата парола"
+
+msgid "Minimum 8 characters"
+msgstr "Минимум 8 символа"
+
+msgid "Update Password"
+msgstr "Обнови парола"
+
+msgid "Password changed successfully"
+msgstr "Паролата е променена успешно"
+
+msgid "Current password is incorrect"
+msgstr "Текущата парола е грешна"
+
+msgid "Passwords do not match"
+msgstr "Паролите не съвпадат"
+
+msgid "New password must be at least 8 characters"
+msgstr "Новата парола трябва да е поне 8 символа"
+
+#: Delete Account
+msgid "Delete Account"
+msgstr "Изтриване на акаунт"
+
+msgid "Once you delete your account, all your data will be permanently removed. This action cannot be undone."
+msgstr "След като изтриете акаунта си, всички данни ще бъдат премахнати завинаги. Това действие не може да бъде отменено."
+
+msgid "Delete My Account"
+msgstr "Изтрий акаунта ми"
+
+msgid "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed."
+msgstr "Сигурни ли сте, че искате да изтриете акаунта си? Това действие не може да бъде отменено и всички данни ще бъдат премахнати завинаги."
+
+msgid "Cancel"
+msgstr "Отказ"
+
+msgid "Yes, Delete My Account"
+msgstr "Да, изтрий акаунта ми"
+
+msgid "Account deleted successfully"
+msgstr "Акаунтът е изтрит успешно"
+
+#: Favorites Tab
+msgid "My Favorites"
+msgstr "Моите любими"
+
+msgid "Properties you have saved"
+msgstr "Имоти, които сте запазили"
+
+msgid "No favorites yet"
+msgstr "Все още няма любими"
+
+msgid "Start browsing properties and save your favorites here."
+msgstr "Започнете да разглеждате имоти и запазете любимите си тук."
+
+msgid "Browse Properties"
+msgstr "Разгледай имоти"
+
+msgid "Remove from favorites"
+msgstr "Премахни от любими"
+
+msgid "Removed from favorites"
+msgstr "Премахнато от любими"
+
+msgid "Added to favorites"
+msgstr "Добавено в любими"
+
+msgid "Please log in to save favorites"
+msgstr "Моля, влезте за да запазвате любими"
+
+#: Avatar
+msgid "Avatar updated successfully"
+msgstr "Аватарът е обновен успешно"
+
+msgid "Avatar removed"
+msgstr "Аватарът е премахнат"
+
+msgid "No file uploaded"
+msgstr "Няма качен файл"
+
+msgid "Invalid file type. Please upload JPG, PNG, GIF, or WebP."
+msgstr "Невалиден тип файл. Моля, качете JPG, PNG, GIF или WebP."
+
+msgid "File too large. Maximum size is 2MB."
+msgstr "Файлът е твърде голям. Максимален размер е 2MB."
+
+#: Login Page
+msgid "Sign In"
+msgstr "Вход"
+
+msgid "Sign in to save your favorite properties and manage your profile."
+msgstr "Влезте, за да запазвате любими имоти и да управлявате профила си."
+
+msgid "Continue with Google"
+msgstr "Продължи с Google"
+
+msgid "or"
+msgstr "или"
+
+msgid "Email or Username"
+msgstr "Имейл или потребителско име"
+
+msgid "Password"
+msgstr "Парола"
+
+msgid "Remember Me"
+msgstr "Запомни ме"
+
+msgid "Forgot password?"
+msgstr "Забравена парола?"
+
+msgid "Don't have an account?"
+msgstr "Нямате акаунт?"
+
+msgid "Create one"
+msgstr "Създайте"
+
+msgid "Why create an account?"
+msgstr "Защо да създадете акаунт?"
+
+msgid "Save Favorites"
+msgstr "Запазване на любими"
+
+msgid "Keep track of properties you love"
+msgstr "Следете имотите, които харесвате"
+
+msgid "Get Notifications"
+msgstr "Получавайте известия"
+
+msgid "Receive updates on new properties"
+msgstr "Получавайте актуализации за нови имоти"
+
+msgid "Quick Access"
+msgstr "Бърз достъп"
+
+msgid "Manage your profile and preferences"
+msgstr "Управлявайте профила и предпочитанията си"
+
+msgid "By signing in, you agree to our"
+msgstr "С влизането се съгласявате с нашите"
+
+msgid "Terms of Service"
+msgstr "Условия за ползване"
+
+msgid "and"
+msgstr "и"
+
+msgid "Privacy Policy"
+msgstr "Политика за поверителност"
+
+#: Register Page
+msgid "Create Account"
+msgstr "Създаване на акаунт"
+
+msgid "Join HomeBio to save favorites and get personalized recommendations."
+msgstr "Присъединете се към HomeBio, за да запазвате любими и да получавате персонализирани препоръки."
+
+msgid "Sign up with Google"
+msgstr "Регистрация с Google"
+
+msgid "or register with email"
+msgstr "или се регистрирайте с имейл"
+
+msgid "Confirm Password"
+msgstr "Потвърдете паролата"
+
+msgid "I agree to the %1$s and %2$s"
+msgstr "Съгласен съм с %1$s и %2$s"
+
+msgid "Already have an account?"
+msgstr "Вече имате акаунт?"
+
+msgid "Sign in"
+msgstr "Влезте"
+
+msgid "Registration Successful!"
+msgstr "Регистрацията е успешна!"
+
+msgid "Please check your email to verify your account."
+msgstr "Моля, проверете имейла си за потвърждение на акаунта."
+
+#: Registration Errors
+msgid "Please enter your first name."
+msgstr "Моля, въведете името си."
+
+msgid "Please enter your last name."
+msgstr "Моля, въведете фамилията си."
+
+msgid "Please enter your email address."
+msgstr "Моля, въведете имейл адреса си."
+
+msgid "Please enter a valid email address."
+msgstr "Моля, въведете валиден имейл адрес."
+
+msgid "Please enter a password."
+msgstr "Моля, въведете парола."
+
+msgid "Password must be at least 8 characters."
+msgstr "Паролата трябва да е поне 8 символа."
+
+msgid "Passwords do not match."
+msgstr "Паролите не съвпадат."
+
+msgid "You must agree to the Terms of Service and Privacy Policy."
+msgstr "Трябва да се съгласите с Условията за ползване и Политиката за поверителност."
+
+msgid "This email is already registered. Please sign in instead."
+msgstr "Този имейл вече е регистриран. Моля, влезте."
+
+msgid "Invalid username or password. Please try again."
+msgstr "Невалидно потребителско име или парола. Моля, опитайте отново."
+
+#: Properties
+msgid "Featured Properties"
+msgstr "Избрани имоти"
+
+msgid "Discover the perfect property from our curated selection of homes."
+msgstr "Открийте перфектния имот от нашата селекция от домове."
+
+msgid "View All Properties"
+msgstr "Виж всички имоти"
+
+msgid "View Property"
+msgstr "Виж имота"
+
+msgid "Property Details"
+msgstr "Детайли за имота"
+
+msgid "Property Features"
+msgstr "Характеристики на имота"
+
+msgid "Similar Properties"
+msgstr "Подобни имоти"
+
+msgid "Contact Agent"
+msgstr "Свържете се с агент"
+
+msgid "Price"
+msgstr "Цена"
+
+msgid "Location"
+msgstr "Локация"
+
+msgid "Area"
+msgstr "Площ"
+
+msgid "Area (m²)"
+msgstr "Площ (м²)"
+
+msgid "Bedrooms"
+msgstr "Спални"
+
+msgid "Bathrooms"
+msgstr "Бани"
+
+msgid "Rooms"
+msgstr "Стаи"
+
+msgid "Year Built"
+msgstr "Година на построяване"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "No properties found."
+msgstr "Няма намерени имоти."
+
+msgid "No properties found matching your criteria."
+msgstr "Няма имоти, отговарящи на критериите ви."
+
+#: Homepage
+msgid "Find Your Dream Home"
+msgstr "Намерете мечтания дом"
+
+msgid "Browse our selection of quality properties"
+msgstr "Разгледайте нашата селекция от качествени имоти"
+
+msgid "Why Choose HomeBio"
+msgstr "Защо да изберете HomeBio"
+
+msgid "Quality Properties"
+msgstr "Качествени имоти"
+
+msgid "Hand-picked selection of premium properties."
+msgstr "Ръчно подбрана селекция от премиум имоти."
+
+msgid "Save Time"
+msgstr "Спестете време"
+
+msgid "Quick and easy property search experience."
+msgstr "Бързо и лесно търсене на имоти."
+
+msgid "Secure & Private"
+msgstr "Сигурно и поверително"
+
+msgid "Your data is protected"
+msgstr "Вашите данни са защитени"
+
+msgid "Free Forever"
+msgstr "Безплатно завинаги"
+
+msgid "No hidden fees or charges"
+msgstr "Без скрити такси"
+
+#: Footer
+msgid "Footer"
+msgstr "Долна част"
+
+msgid "Footer widget area."
+msgstr "Област за уиджети в долната част."
+
+msgid "All rights reserved."
+msgstr "Всички права запазени."
+
+msgid "Contact"
+msgstr "Контакт"
+
+#: Languages
+msgid "English"
+msgstr "Английски"
+
+msgid "Bulgarian (Български)"
+msgstr "Български (Български)"
+
+msgid "Russian (Русский)"
+msgstr "Руски (Русский)"
+
+msgid "Ukrainian (Українська)"
+msgstr "Украински (Українська)"
+
+msgid "Language"
+msgstr "Език"
+
+msgid "Language Preferences"
+msgstr "Езикови предпочитания"
+
+msgid "Choose your preferred language for the website."
+msgstr "Изберете предпочитания език за уебсайта."
+
+msgid "Save Language"
+msgstr "Запази език"
+
+msgid "Language preference saved!"
+msgstr "Езиковото предпочитание е запазено!"
+
+#: Security Messages
+msgid "Security check failed"
+msgstr "Проверката за сигурност е неуспешна"
+
+msgid "Security check failed. Please try again."
+msgstr "Проверката за сигурност е неуспешна. Моля, опитайте отново."
+
+msgid "Please log in"
+msgstr "Моля, влезте"
+
+#: Misc
+msgid "Sidebar"
+msgstr "Странична лента"
+
+msgid "Add widgets here."
+msgstr "Добавете уиджети тук."
+
+msgid "Close menu"
+msgstr "Затвори менюто"
+
+msgid "View All"
+msgstr "Виж всички"
+
+msgid "Welcome, %s!"
+msgstr "Добре дошли, %s!"
+
+msgid "Welcome to %s!"
+msgstr "Добре дошли в %s!"
+
+msgid "Invalid property"
+msgstr "Невалиден имот"
+
+#: Property Card - Plural forms
+msgid "%d bed"
+msgid_plural "%d beds"
+msgstr[0] "%d спалня"
+msgstr[1] "%d спални"
+
+msgid "%d bath"
+msgid_plural "%d baths"
+msgstr[0] "%d баня"
+msgstr[1] "%d бани"
+
+#: Footer
+msgid "Navigation"
+msgstr "Навигация"
+
+msgid "Email: info@homebio.com"
+msgstr "Имейл: info@homebio.com"

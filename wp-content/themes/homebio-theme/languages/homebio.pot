@@ -1,0 +1,507 @@
+# HomeBio Theme Translation Template
+# Copyright (C) 2024 HomeBio Team
+# This file is distributed under the same license as the HomeBio theme.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: HomeBio 1.0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-17 12:00+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: HomeBio Theme\n"
+"X-Domain: homebio\n"
+
+#: Navigation
+msgid "Home"
+msgstr ""
+
+msgid "Properties"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Sign Up"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "My Cabinet"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Skip to content"
+msgstr ""
+
+msgid "Primary Menu"
+msgstr ""
+
+msgid "Footer Menu"
+msgstr ""
+
+#: User Cabinet
+msgid "Settings"
+msgstr ""
+
+msgid "Security"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid "Profile Settings"
+msgstr ""
+
+msgid "Manage your personal information"
+msgstr ""
+
+msgid "Profile Photo"
+msgstr ""
+
+msgid "Upload a photo to personalize your profile."
+msgstr ""
+
+msgid "Upload Photo"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "JPG, PNG, GIF or WebP. Max 2MB."
+msgstr ""
+
+msgid "First Name"
+msgstr ""
+
+msgid "Last Name"
+msgstr ""
+
+msgid "Email Address"
+msgstr ""
+
+msgid "Email is managed by your Google account"
+msgstr ""
+
+msgid "Phone Number"
+msgstr ""
+
+msgid "Date of Birth"
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+msgid "Settings saved successfully"
+msgstr ""
+
+#: Security Tab
+msgid "Manage your account security settings"
+msgstr ""
+
+msgid "Google Account"
+msgstr ""
+
+msgid "Your account is connected to Google. Password is managed through your Google account."
+msgstr ""
+
+msgid "Connected"
+msgstr ""
+
+msgid "Change Password"
+msgstr ""
+
+msgid "Current Password"
+msgstr ""
+
+msgid "New Password"
+msgstr ""
+
+msgid "Confirm New Password"
+msgstr ""
+
+msgid "Minimum 8 characters"
+msgstr ""
+
+msgid "Update Password"
+msgstr ""
+
+msgid "Password changed successfully"
+msgstr ""
+
+msgid "Current password is incorrect"
+msgstr ""
+
+msgid "Passwords do not match"
+msgstr ""
+
+msgid "New password must be at least 8 characters"
+msgstr ""
+
+#: Delete Account
+msgid "Delete Account"
+msgstr ""
+
+msgid "Once you delete your account, all your data will be permanently removed. This action cannot be undone."
+msgstr ""
+
+msgid "Delete My Account"
+msgstr ""
+
+msgid "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Yes, Delete My Account"
+msgstr ""
+
+msgid "Account deleted successfully"
+msgstr ""
+
+#: Favorites Tab
+msgid "My Favorites"
+msgstr ""
+
+msgid "Properties you have saved"
+msgstr ""
+
+msgid "No favorites yet"
+msgstr ""
+
+msgid "Start browsing properties and save your favorites here."
+msgstr ""
+
+msgid "Browse Properties"
+msgstr ""
+
+msgid "Remove from favorites"
+msgstr ""
+
+msgid "Removed from favorites"
+msgstr ""
+
+msgid "Added to favorites"
+msgstr ""
+
+msgid "Please log in to save favorites"
+msgstr ""
+
+#: Avatar
+msgid "Avatar updated successfully"
+msgstr ""
+
+msgid "Avatar removed"
+msgstr ""
+
+msgid "No file uploaded"
+msgstr ""
+
+msgid "Invalid file type. Please upload JPG, PNG, GIF, or WebP."
+msgstr ""
+
+msgid "File too large. Maximum size is 2MB."
+msgstr ""
+
+#: Login Page
+msgid "Sign In"
+msgstr ""
+
+msgid "Sign in to save your favorite properties and manage your profile."
+msgstr ""
+
+msgid "Continue with Google"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "Email or Username"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Remember Me"
+msgstr ""
+
+msgid "Forgot password?"
+msgstr ""
+
+msgid "Don't have an account?"
+msgstr ""
+
+msgid "Create one"
+msgstr ""
+
+msgid "Why create an account?"
+msgstr ""
+
+msgid "Save Favorites"
+msgstr ""
+
+msgid "Keep track of properties you love"
+msgstr ""
+
+msgid "Get Notifications"
+msgstr ""
+
+msgid "Receive updates on new properties"
+msgstr ""
+
+msgid "Quick Access"
+msgstr ""
+
+msgid "Manage your profile and preferences"
+msgstr ""
+
+msgid "By signing in, you agree to our"
+msgstr ""
+
+msgid "Terms of Service"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+msgid "Privacy Policy"
+msgstr ""
+
+#: Register Page
+msgid "Create Account"
+msgstr ""
+
+msgid "Join HomeBio to save favorites and get personalized recommendations."
+msgstr ""
+
+msgid "Sign up with Google"
+msgstr ""
+
+msgid "or register with email"
+msgstr ""
+
+msgid "Confirm Password"
+msgstr ""
+
+msgid "I agree to the %1$s and %2$s"
+msgstr ""
+
+msgid "Already have an account?"
+msgstr ""
+
+msgid "Sign in"
+msgstr ""
+
+msgid "Registration Successful!"
+msgstr ""
+
+msgid "Please check your email to verify your account."
+msgstr ""
+
+#: Registration Errors
+msgid "Please enter your first name."
+msgstr ""
+
+msgid "Please enter your last name."
+msgstr ""
+
+msgid "Please enter your email address."
+msgstr ""
+
+msgid "Please enter a valid email address."
+msgstr ""
+
+msgid "Please enter a password."
+msgstr ""
+
+msgid "Password must be at least 8 characters."
+msgstr ""
+
+msgid "Passwords do not match."
+msgstr ""
+
+msgid "You must agree to the Terms of Service and Privacy Policy."
+msgstr ""
+
+msgid "This email is already registered. Please sign in instead."
+msgstr ""
+
+msgid "Invalid username or password. Please try again."
+msgstr ""
+
+#: Properties
+msgid "Featured Properties"
+msgstr ""
+
+msgid "Discover the perfect property from our curated selection of homes."
+msgstr ""
+
+msgid "View All Properties"
+msgstr ""
+
+msgid "View Property"
+msgstr ""
+
+msgid "Property Details"
+msgstr ""
+
+msgid "Property Features"
+msgstr ""
+
+msgid "Similar Properties"
+msgstr ""
+
+msgid "Contact Agent"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Area (m²)"
+msgstr ""
+
+msgid "Bedrooms"
+msgstr ""
+
+msgid "Bathrooms"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Year Built"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "No properties found."
+msgstr ""
+
+msgid "No properties found matching your criteria."
+msgstr ""
+
+#: Homepage
+msgid "Find Your Dream Home"
+msgstr ""
+
+msgid "Browse our selection of quality properties"
+msgstr ""
+
+msgid "Why Choose HomeBio"
+msgstr ""
+
+msgid "Quality Properties"
+msgstr ""
+
+msgid "Hand-picked selection of premium properties."
+msgstr ""
+
+msgid "Save Time"
+msgstr ""
+
+msgid "Quick and easy property search experience."
+msgstr ""
+
+msgid "Secure & Private"
+msgstr ""
+
+msgid "Your data is protected"
+msgstr ""
+
+msgid "Free Forever"
+msgstr ""
+
+msgid "No hidden fees or charges"
+msgstr ""
+
+#: Footer
+msgid "Footer"
+msgstr ""
+
+msgid "Footer widget area."
+msgstr ""
+
+msgid "All rights reserved."
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+#: Languages
+msgid "English"
+msgstr ""
+
+msgid "Bulgarian (Български)"
+msgstr ""
+
+msgid "Russian (Русский)"
+msgstr ""
+
+msgid "Ukrainian (Українська)"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Language Preferences"
+msgstr ""
+
+msgid "Choose your preferred language for the website."
+msgstr ""
+
+msgid "Save Language"
+msgstr ""
+
+msgid "Language preference saved!"
+msgstr ""
+
+#: Security Messages
+msgid "Security check failed"
+msgstr ""
+
+msgid "Security check failed. Please try again."
+msgstr ""
+
+msgid "Please log in"
+msgstr ""
+
+#: Misc
+msgid "Sidebar"
+msgstr ""
+
+msgid "Add widgets here."
+msgstr ""
+
+msgid "Close menu"
+msgstr ""
+
+msgid "View All"
+msgstr ""
+
+msgid "Welcome, %s!"
+msgstr ""
+
+msgid "Welcome to %s!"
+msgstr ""
+
+msgid "Invalid property"
+msgstr ""

@@ -1,0 +1,527 @@
+# Russian Translation for HomeBio Theme
+# Copyright (C) 2024 HomeBio Team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: HomeBio 1.0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-17 12:00+0000\n"
+"PO-Revision-Date: 2024-12-17 12:00+0000\n"
+"Last-Translator: HomeBio Team\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: HomeBio Theme\n"
+"X-Domain: homebio\n"
+
+#: Navigation
+msgid "Home"
+msgstr "Главная"
+
+msgid "Properties"
+msgstr "Недвижимость"
+
+msgid "Login"
+msgstr "Войти"
+
+msgid "Sign Up"
+msgstr "Регистрация"
+
+msgid "Logout"
+msgstr "Выйти"
+
+msgid "My Cabinet"
+msgstr "Мой кабинет"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Skip to content"
+msgstr "Перейти к содержимому"
+
+msgid "Primary Menu"
+msgstr "Главное меню"
+
+msgid "Footer Menu"
+msgstr "Меню в подвале"
+
+#: User Cabinet
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Security"
+msgstr "Безопасность"
+
+msgid "Favorites"
+msgstr "Избранное"
+
+msgid "Profile Settings"
+msgstr "Настройки профиля"
+
+msgid "Manage your personal information"
+msgstr "Управляйте личной информацией"
+
+msgid "Profile Photo"
+msgstr "Фото профиля"
+
+msgid "Upload a photo to personalize your profile."
+msgstr "Загрузите фото для персонализации профиля."
+
+msgid "Upload Photo"
+msgstr "Загрузить фото"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "JPG, PNG, GIF or WebP. Max 2MB."
+msgstr "JPG, PNG, GIF или WebP. Макс. 2МБ."
+
+msgid "First Name"
+msgstr "Имя"
+
+msgid "Last Name"
+msgstr "Фамилия"
+
+msgid "Email Address"
+msgstr "Электронная почта"
+
+msgid "Email is managed by your Google account"
+msgstr "Email управляется вашим аккаунтом Google"
+
+msgid "Phone Number"
+msgstr "Номер телефона"
+
+msgid "Date of Birth"
+msgstr "Дата рождения"
+
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+msgid "Settings saved successfully"
+msgstr "Настройки успешно сохранены"
+
+#: Security Tab
+msgid "Manage your account security settings"
+msgstr "Управляйте настройками безопасности аккаунта"
+
+msgid "Google Account"
+msgstr "Аккаунт Google"
+
+msgid "Your account is connected to Google. Password is managed through your Google account."
+msgstr "Ваш аккаунт подключен к Google. Пароль управляется через ваш аккаунт Google."
+
+msgid "Connected"
+msgstr "Подключен"
+
+msgid "Change Password"
+msgstr "Изменить пароль"
+
+msgid "Current Password"
+msgstr "Текущий пароль"
+
+msgid "New Password"
+msgstr "Новый пароль"
+
+msgid "Confirm New Password"
+msgstr "Подтвердите новый пароль"
+
+msgid "Minimum 8 characters"
+msgstr "Минимум 8 символов"
+
+msgid "Update Password"
+msgstr "Обновить пароль"
+
+msgid "Password changed successfully"
+msgstr "Пароль успешно изменен"
+
+msgid "Current password is incorrect"
+msgstr "Текущий пароль неверен"
+
+msgid "Passwords do not match"
+msgstr "Пароли не совпадают"
+
+msgid "New password must be at least 8 characters"
+msgstr "Новый пароль должен содержать минимум 8 символов"
+
+#: Delete Account
+msgid "Delete Account"
+msgstr "Удалить аккаунт"
+
+msgid "Once you delete your account, all your data will be permanently removed. This action cannot be undone."
+msgstr "После удаления аккаунта все ваши данные будут безвозвратно удалены. Это действие нельзя отменить."
+
+msgid "Delete My Account"
+msgstr "Удалить мой аккаунт"
+
+msgid "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed."
+msgstr "Вы уверены, что хотите удалить свой аккаунт? Это действие нельзя отменить, и все ваши данные будут удалены навсегда."
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Yes, Delete My Account"
+msgstr "Да, удалить мой аккаунт"
+
+msgid "Account deleted successfully"
+msgstr "Аккаунт успешно удален"
+
+#: Favorites Tab
+msgid "My Favorites"
+msgstr "Мое избранное"
+
+msgid "Properties you have saved"
+msgstr "Сохраненная недвижимость"
+
+msgid "No favorites yet"
+msgstr "Пока нет избранного"
+
+msgid "Start browsing properties and save your favorites here."
+msgstr "Начните просматривать недвижимость и сохраняйте избранное здесь."
+
+msgid "Browse Properties"
+msgstr "Смотреть недвижимость"
+
+msgid "Remove from favorites"
+msgstr "Удалить из избранного"
+
+msgid "Removed from favorites"
+msgstr "Удалено из избранного"
+
+msgid "Added to favorites"
+msgstr "Добавлено в избранное"
+
+msgid "Please log in to save favorites"
+msgstr "Войдите, чтобы сохранять избранное"
+
+#: Avatar
+msgid "Avatar updated successfully"
+msgstr "Аватар успешно обновлен"
+
+msgid "Avatar removed"
+msgstr "Аватар удален"
+
+msgid "No file uploaded"
+msgstr "Файл не загружен"
+
+msgid "Invalid file type. Please upload JPG, PNG, GIF, or WebP."
+msgstr "Неверный тип файла. Загрузите JPG, PNG, GIF или WebP."
+
+msgid "File too large. Maximum size is 2MB."
+msgstr "Файл слишком большой. Максимальный размер 2МБ."
+
+#: Login Page
+msgid "Sign In"
+msgstr "Вход"
+
+msgid "Sign in to save your favorite properties and manage your profile."
+msgstr "Войдите, чтобы сохранять избранную недвижимость и управлять профилем."
+
+msgid "Continue with Google"
+msgstr "Продолжить с Google"
+
+msgid "or"
+msgstr "или"
+
+msgid "Email or Username"
+msgstr "Email или имя пользователя"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Remember Me"
+msgstr "Запомнить меня"
+
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+msgid "Don't have an account?"
+msgstr "Нет аккаунта?"
+
+msgid "Create one"
+msgstr "Создать"
+
+msgid "Why create an account?"
+msgstr "Зачем создавать аккаунт?"
+
+msgid "Save Favorites"
+msgstr "Сохранение избранного"
+
+msgid "Keep track of properties you love"
+msgstr "Отслеживайте понравившуюся недвижимость"
+
+msgid "Get Notifications"
+msgstr "Получайте уведомления"
+
+msgid "Receive updates on new properties"
+msgstr "Получайте обновления о новой недвижимости"
+
+msgid "Quick Access"
+msgstr "Быстрый доступ"
+
+msgid "Manage your profile and preferences"
+msgstr "Управляйте профилем и настройками"
+
+msgid "By signing in, you agree to our"
+msgstr "Входя, вы соглашаетесь с нашими"
+
+msgid "Terms of Service"
+msgstr "Условиями использования"
+
+msgid "and"
+msgstr "и"
+
+msgid "Privacy Policy"
+msgstr "Политикой конфиденциальности"
+
+#: Register Page
+msgid "Create Account"
+msgstr "Создать аккаунт"
+
+msgid "Join HomeBio to save favorites and get personalized recommendations."
+msgstr "Присоединяйтесь к HomeBio, чтобы сохранять избранное и получать персональные рекомендации."
+
+msgid "Sign up with Google"
+msgstr "Регистрация через Google"
+
+msgid "or register with email"
+msgstr "или зарегистрируйтесь по email"
+
+msgid "Confirm Password"
+msgstr "Подтвердите пароль"
+
+msgid "I agree to the %1$s and %2$s"
+msgstr "Я согласен с %1$s и %2$s"
+
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"
+
+msgid "Sign in"
+msgstr "Войти"
+
+msgid "Registration Successful!"
+msgstr "Регистрация успешна!"
+
+msgid "Please check your email to verify your account."
+msgstr "Проверьте email для подтверждения аккаунта."
+
+#: Registration Errors
+msgid "Please enter your first name."
+msgstr "Пожалуйста, введите имя."
+
+msgid "Please enter your last name."
+msgstr "Пожалуйста, введите фамилию."
+
+msgid "Please enter your email address."
+msgstr "Пожалуйста, введите email адрес."
+
+msgid "Please enter a valid email address."
+msgstr "Пожалуйста, введите корректный email."
+
+msgid "Please enter a password."
+msgstr "Пожалуйста, введите пароль."
+
+msgid "Password must be at least 8 characters."
+msgstr "Пароль должен содержать минимум 8 символов."
+
+msgid "Passwords do not match."
+msgstr "Пароли не совпадают."
+
+msgid "You must agree to the Terms of Service and Privacy Policy."
+msgstr "Вы должны согласиться с Условиями использования и Политикой конфиденциальности."
+
+msgid "This email is already registered. Please sign in instead."
+msgstr "Этот email уже зарегистрирован. Пожалуйста, войдите."
+
+msgid "Invalid username or password. Please try again."
+msgstr "Неверное имя пользователя или пароль. Попробуйте снова."
+
+#: Properties
+msgid "Featured Properties"
+msgstr "Рекомендуемая недвижимость"
+
+msgid "Discover the perfect property from our curated selection of homes."
+msgstr "Найдите идеальную недвижимость из нашей подборки домов."
+
+msgid "View All Properties"
+msgstr "Смотреть всю недвижимость"
+
+msgid "View Property"
+msgstr "Смотреть объект"
+
+msgid "Property Details"
+msgstr "Детали объекта"
+
+msgid "Property Features"
+msgstr "Характеристики"
+
+msgid "Similar Properties"
+msgstr "Похожие объекты"
+
+msgid "Contact Agent"
+msgstr "Связаться с агентом"
+
+msgid "Price"
+msgstr "Цена"
+
+msgid "Location"
+msgstr "Расположение"
+
+msgid "Area"
+msgstr "Площадь"
+
+msgid "Area (m²)"
+msgstr "Площадь (м²)"
+
+msgid "Bedrooms"
+msgstr "Спальни"
+
+msgid "Bathrooms"
+msgstr "Ванные"
+
+msgid "Rooms"
+msgstr "Комнаты"
+
+msgid "Year Built"
+msgstr "Год постройки"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "No properties found."
+msgstr "Недвижимость не найдена."
+
+msgid "No properties found matching your criteria."
+msgstr "Не найдено недвижимости по вашим критериям."
+
+#: Homepage
+msgid "Find Your Dream Home"
+msgstr "Найдите дом мечты"
+
+msgid "Browse our selection of quality properties"
+msgstr "Просмотрите нашу подборку качественной недвижимости"
+
+msgid "Why Choose HomeBio"
+msgstr "Почему HomeBio"
+
+msgid "Quality Properties"
+msgstr "Качественная недвижимость"
+
+msgid "Hand-picked selection of premium properties."
+msgstr "Тщательно отобранная премиум недвижимость."
+
+msgid "Save Time"
+msgstr "Экономьте время"
+
+msgid "Quick and easy property search experience."
+msgstr "Быстрый и удобный поиск недвижимости."
+
+msgid "Secure & Private"
+msgstr "Безопасно и конфиденциально"
+
+msgid "Your data is protected"
+msgstr "Ваши данные защищены"
+
+msgid "Free Forever"
+msgstr "Бесплатно навсегда"
+
+msgid "No hidden fees or charges"
+msgstr "Никаких скрытых платежей"
+
+#: Footer
+msgid "Footer"
+msgstr "Подвал"
+
+msgid "Footer widget area."
+msgstr "Область виджетов подвала."
+
+msgid "All rights reserved."
+msgstr "Все права защищены."
+
+msgid "Contact"
+msgstr "Контакты"
+
+#: Languages
+msgid "English"
+msgstr "Английский"
+
+msgid "Bulgarian (Български)"
+msgstr "Болгарский (Български)"
+
+msgid "Russian (Русский)"
+msgstr "Русский (Русский)"
+
+msgid "Ukrainian (Українська)"
+msgstr "Украинский (Українська)"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Language Preferences"
+msgstr "Языковые настройки"
+
+msgid "Choose your preferred language for the website."
+msgstr "Выберите предпочтительный язык сайта."
+
+msgid "Save Language"
+msgstr "Сохранить язык"
+
+msgid "Language preference saved!"
+msgstr "Языковые настройки сохранены!"
+
+#: Security Messages
+msgid "Security check failed"
+msgstr "Проверка безопасности не пройдена"
+
+msgid "Security check failed. Please try again."
+msgstr "Проверка безопасности не пройдена. Попробуйте снова."
+
+msgid "Please log in"
+msgstr "Пожалуйста, войдите"
+
+#: Misc
+msgid "Sidebar"
+msgstr "Боковая панель"
+
+msgid "Add widgets here."
+msgstr "Добавьте виджеты здесь."
+
+msgid "Close menu"
+msgstr "Закрыть меню"
+
+msgid "View All"
+msgstr "Смотреть все"
+
+msgid "Welcome, %s!"
+msgstr "Добро пожаловать, %s!"
+
+msgid "Welcome to %s!"
+msgstr "Добро пожаловать в %s!"
+
+msgid "Invalid property"
+msgstr "Неверный объект"
+
+#: Property Card - Plural forms
+msgid "%d bed"
+msgid_plural "%d beds"
+msgstr[0] "%d спальня"
+msgstr[1] "%d спальни"
+msgstr[2] "%d спален"
+
+msgid "%d bath"
+msgid_plural "%d baths"
+msgstr[0] "%d ванная"
+msgstr[1] "%d ванные"
+msgstr[2] "%d ванных"
+
+#: Footer
+msgid "Navigation"
+msgstr "Навигация"
+
+msgid "Email: info@homebio.com"
+msgstr "Эл. почта: info@homebio.com"
