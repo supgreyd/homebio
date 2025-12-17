@@ -1086,7 +1086,7 @@ p {
 .btn-google:hover,
 .social-login .nsl-button:hover {
     border-color: var(--color-gray-400);
-    background: var(--color-gray-50);
+    background: var(--color-gray-500);
     box-shadow: var(--shadow);
 }
 
@@ -1641,7 +1641,7 @@ p {
 
 .um-language-option:hover {
     border-color: var(--color-gray-300);
-    background: var(--color-gray-50);
+    background: var(--color-gray-500);
 }
 
 .um-language-option.selected {
@@ -2345,7 +2345,7 @@ p {
 
 /* Security Cards */
 .security-card {
-    background: var(--color-gray-50);
+    background: var(--color-gray-500);
     border: 1px solid var(--color-gray-200);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-xl);
