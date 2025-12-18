@@ -525,3 +525,106 @@ msgstr "Навігація"
 
 msgid "Email: info@homebio.com"
 msgstr "Ел. пошта: info@homebio.com"
+
+#: Notifications
+msgid "Notifications"
+msgstr "Сповіщення"
+
+msgid "Updates about your favorite properties"
+msgstr "Оновлення про вашу обрану нерухомість"
+
+msgid "Mark all as read"
+msgstr "Позначити все як прочитане"
+
+msgid "Clear all"
+msgstr "Очистити все"
+
+msgid "Email notifications"
+msgstr "Email сповіщення"
+
+msgid "Receive email when your favorite properties are updated"
+msgstr "Отримувати email коли ваша обрана нерухомість оновлюється"
+
+msgid "New"
+msgstr "Нове"
+
+msgid "Mark as read"
+msgstr "Позначити як прочитане"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "No notifications yet"
+msgstr "Поки немає сповіщень"
+
+msgid "When properties in your favorites are updated, you'll see notifications here."
+msgstr "Коли нерухомість з вашого обраного оновлюється, ви побачите сповіщення тут."
+
+msgid "Notification marked as read"
+msgstr "Сповіщення позначено як прочитане"
+
+msgid "All notifications marked as read"
+msgstr "Всі сповіщення позначено як прочитані"
+
+msgid "Notification deleted"
+msgstr "Сповіщення видалено"
+
+msgid "All notifications deleted"
+msgstr "Всі сповіщення видалено"
+
+msgid "Email notifications enabled"
+msgstr "Email сповіщення увімкнено"
+
+msgid "Email notifications disabled"
+msgstr "Email сповіщення вимкнено"
+
+msgid "Could not update notification"
+msgstr "Не вдалося оновити сповіщення"
+
+msgid "Could not delete notification"
+msgstr "Не вдалося видалити сповіщення"
+
+msgid "Invalid notification"
+msgstr "Невірне сповіщення"
+
+msgid "[%1$s] Property Updated: %2$s"
+msgstr "[%1$s] Нерухомість оновлено: %2$s"
+
+msgid "Hello %s,"
+msgstr "Привіт %s,"
+
+msgid "A property in your favorites has been updated: %s"
+msgstr "Нерухомість з вашого обраного оновлено: %s"
+
+msgid "Changes:"
+msgstr "Зміни:"
+
+msgid "View property: %s"
+msgstr "Переглянути нерухомість: %s"
+
+msgid "Manage your notifications: %s"
+msgstr "Керувати сповіщеннями: %s"
+
+msgid "Best regards,"
+msgstr "З повагою,"
+
+msgid "Just now"
+msgstr "Щойно"
+
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d хвилину тому"
+msgstr[1] "%d хвилини тому"
+msgstr[2] "%d хвилин тому"
+
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d годину тому"
+msgstr[1] "%d години тому"
+msgstr[2] "%d годин тому"
+
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d день тому"
+msgstr[1] "%d дні тому"
+msgstr[2] "%d днів тому"

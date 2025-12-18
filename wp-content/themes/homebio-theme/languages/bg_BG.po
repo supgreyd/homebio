@@ -523,3 +523,103 @@ msgstr "Навигация"
 
 msgid "Email: info@homebio.com"
 msgstr "Имейл: info@homebio.com"
+
+#: Notifications
+msgid "Notifications"
+msgstr "Известия"
+
+msgid "Updates about your favorite properties"
+msgstr "Актуализации за вашите любими имоти"
+
+msgid "Mark all as read"
+msgstr "Маркирай всички като прочетени"
+
+msgid "Clear all"
+msgstr "Изчисти всички"
+
+msgid "Email notifications"
+msgstr "Имейл известия"
+
+msgid "Receive email when your favorite properties are updated"
+msgstr "Получавайте имейл, когато любимите ви имоти се актуализират"
+
+msgid "New"
+msgstr "Ново"
+
+msgid "Mark as read"
+msgstr "Маркирай като прочетено"
+
+msgid "Delete"
+msgstr "Изтрий"
+
+msgid "No notifications yet"
+msgstr "Все още няма известия"
+
+msgid "When properties in your favorites are updated, you'll see notifications here."
+msgstr "Когато имотите в любимите ви се актуализират, ще видите известия тук."
+
+msgid "Notification marked as read"
+msgstr "Известието е маркирано като прочетено"
+
+msgid "All notifications marked as read"
+msgstr "Всички известия са маркирани като прочетени"
+
+msgid "Notification deleted"
+msgstr "Известието е изтрито"
+
+msgid "All notifications deleted"
+msgstr "Всички известия са изтрити"
+
+msgid "Email notifications enabled"
+msgstr "Имейл известията са включени"
+
+msgid "Email notifications disabled"
+msgstr "Имейл известията са изключени"
+
+msgid "Could not update notification"
+msgstr "Известието не можа да бъде актуализирано"
+
+msgid "Could not delete notification"
+msgstr "Известието не можа да бъде изтрито"
+
+msgid "Invalid notification"
+msgstr "Невалидно известие"
+
+msgid "[%1$s] Property Updated: %2$s"
+msgstr "[%1$s] Имотът е актуализиран: %2$s"
+
+msgid "Hello %s,"
+msgstr "Здравей %s,"
+
+msgid "A property in your favorites has been updated: %s"
+msgstr "Имот от любимите ви е актуализиран: %s"
+
+msgid "Changes:"
+msgstr "Промени:"
+
+msgid "View property: %s"
+msgstr "Виж имота: %s"
+
+msgid "Manage your notifications: %s"
+msgstr "Управлявайте известията си: %s"
+
+msgid "Best regards,"
+msgstr "С уважение,"
+
+msgid "Just now"
+msgstr "Точно сега"
+
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "преди %d минута"
+msgstr[1] "преди %d минути"
+
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "преди %d час"
+msgstr[1] "преди %d часа"
+
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "преди %d ден"
+msgstr[1] "преди %d дни"

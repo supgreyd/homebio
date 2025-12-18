@@ -19,6 +19,7 @@
         initLanguageSwitcher();
         initDeleteAccount();
         initRemoveFavorite();
+        initNotifications();
     });
 
     /**
@@ -728,6 +729,294 @@
                 });
             });
         });
+    }
+
+    /**
+     * Initialize notifications functionality
+     */
+    function initNotifications() {
+        // Mark single notification as read
+        const markReadBtns = document.querySelectorAll('.mark-read-btn');
+        markReadBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const notificationItem = this.closest('.notification-item');
+                const notificationId = notificationItem.dataset.notificationId;
+
+                if (!notificationId) return;
+
+                this.disabled = true;
+
+                const formData = new FormData();
+                formData.append('action', 'homebio_mark_notification_read');
+                formData.append('notification_id', notificationId);
+                formData.append('nonce', homebioAjax.nonce);
+
+                fetch(homebioAjax.ajaxUrl, {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update UI
+                        notificationItem.classList.remove('unread');
+                        notificationItem.classList.add('read');
+
+                        // Remove badge
+                        const badge = notificationItem.querySelector('.notification-badge');
+                        if (badge) badge.remove();
+
+                        // Remove mark as read button
+                        this.remove();
+
+                        // Update sidebar count
+                        updateNotificationCount(data.data.unread_count);
+                    } else {
+                        showNotification(data.data.message || 'Error', 'error');
+                        this.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Mark read error:', error);
+                    showNotification('An error occurred', 'error');
+                    this.disabled = false;
+                });
+            });
+        });
+
+        // Mark all as read
+        const markAllReadBtn = document.getElementById('mark-all-read-btn');
+        if (markAllReadBtn) {
+            markAllReadBtn.addEventListener('click', function() {
+                this.disabled = true;
+
+                const formData = new FormData();
+                formData.append('action', 'homebio_mark_all_notifications_read');
+                formData.append('nonce', homebioAjax.nonce);
+
+                fetch(homebioAjax.ajaxUrl, {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update all notification items
+                        document.querySelectorAll('.notification-item.unread').forEach(function(item) {
+                            item.classList.remove('unread');
+                            item.classList.add('read');
+
+                            // Remove badge
+                            const badge = item.querySelector('.notification-badge');
+                            if (badge) badge.remove();
+
+                            // Remove mark as read button
+                            const markBtn = item.querySelector('.mark-read-btn');
+                            if (markBtn) markBtn.remove();
+                        });
+
+                        // Update count and remove button
+                        updateNotificationCount(0);
+                        this.remove();
+
+                        showNotification(data.data.message, 'success');
+                    } else {
+                        showNotification(data.data.message || 'Error', 'error');
+                        this.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Mark all read error:', error);
+                    showNotification('An error occurred', 'error');
+                    this.disabled = false;
+                });
+            });
+        }
+
+        // Delete single notification
+        const deleteBtns = document.querySelectorAll('.delete-notification-btn');
+        deleteBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const notificationItem = this.closest('.notification-item');
+                const notificationId = notificationItem.dataset.notificationId;
+
+                if (!notificationId) return;
+
+                this.disabled = true;
+
+                const formData = new FormData();
+                formData.append('action', 'homebio_delete_notification');
+                formData.append('notification_id', notificationId);
+                formData.append('nonce', homebioAjax.nonce);
+
+                fetch(homebioAjax.ajaxUrl, {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Animate removal
+                        notificationItem.style.transition = 'opacity 0.3s, transform 0.3s';
+                        notificationItem.style.opacity = '0';
+                        notificationItem.style.transform = 'translateX(20px)';
+
+                        setTimeout(function() {
+                            notificationItem.remove();
+
+                            // Update count
+                            updateNotificationCount(data.data.unread_count);
+
+                            // Show empty state if no more notifications
+                            const list = document.getElementById('notifications-list');
+                            if (list && list.children.length === 0) {
+                                showNotificationsEmptyState();
+                            }
+                        }, 300);
+                    } else {
+                        showNotification(data.data.message || 'Error', 'error');
+                        this.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Delete notification error:', error);
+                    showNotification('An error occurred', 'error');
+                    this.disabled = false;
+                });
+            });
+        });
+
+        // Delete all notifications
+        const deleteAllBtn = document.getElementById('delete-all-notifications-btn');
+        if (deleteAllBtn) {
+            deleteAllBtn.addEventListener('click', function() {
+                if (!confirm('Are you sure you want to delete all notifications?')) {
+                    return;
+                }
+
+                this.disabled = true;
+
+                const formData = new FormData();
+                formData.append('action', 'homebio_delete_all_notifications');
+                formData.append('nonce', homebioAjax.nonce);
+
+                fetch(homebioAjax.ajaxUrl, {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateNotificationCount(0);
+                        showNotificationsEmptyState();
+                        showNotification(data.data.message, 'success');
+                    } else {
+                        showNotification(data.data.message || 'Error', 'error');
+                        this.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Delete all notifications error:', error);
+                    showNotification('An error occurred', 'error');
+                    this.disabled = false;
+                });
+            });
+        }
+
+        // Email notifications toggle
+        const emailToggle = document.getElementById('email-notifications-toggle');
+        if (emailToggle) {
+            emailToggle.addEventListener('change', function() {
+                const enabled = this.checked ? 'enabled' : 'disabled';
+
+                const formData = new FormData();
+                formData.append('action', 'homebio_toggle_email_notifications');
+                formData.append('enabled', enabled);
+                formData.append('nonce', homebioAjax.nonce);
+
+                fetch(homebioAjax.ajaxUrl, {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotification(data.data.message, 'success');
+                    } else {
+                        showNotification(data.data.message || 'Error', 'error');
+                        // Revert toggle
+                        this.checked = !this.checked;
+                    }
+                })
+                .catch(error => {
+                    console.error('Toggle email notifications error:', error);
+                    showNotification('An error occurred', 'error');
+                    // Revert toggle
+                    this.checked = !this.checked;
+                });
+            });
+        }
+    }
+
+    /**
+     * Update notification count in sidebar
+     */
+    function updateNotificationCount(count) {
+        const navItem = document.querySelector('.cabinet-nav-item[href*="notifications"]');
+        if (!navItem) return;
+
+        let badge = navItem.querySelector('.cabinet-nav-count');
+
+        if (count > 0) {
+            if (badge) {
+                badge.textContent = count;
+            } else {
+                badge = document.createElement('span');
+                badge.className = 'cabinet-nav-count';
+                badge.textContent = count;
+                navItem.appendChild(badge);
+            }
+        } else {
+            if (badge) {
+                badge.remove();
+            }
+        }
+    }
+
+    /**
+     * Show empty notifications state
+     */
+    function showNotificationsEmptyState() {
+        const section = document.querySelector('.cabinet-section');
+        if (!section) return;
+
+        // Remove header actions and list
+        const actionsDiv = document.querySelector('.notifications-actions');
+        if (actionsDiv) actionsDiv.remove();
+
+        const list = document.getElementById('notifications-list');
+        if (list) list.remove();
+
+        // Add empty state
+        const settings = document.querySelector('.notifications-settings');
+        if (settings) {
+            settings.insertAdjacentHTML('afterend', `
+                <div class="notifications-empty">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <h3>No notifications yet</h3>
+                    <p>When properties in your favorites are updated, you'll see notifications here.</p>
+                    <a href="/properties/" class="btn btn-primary">Browse Properties</a>
+                </div>
+            `);
+        }
     }
 
 })();

@@ -525,3 +525,106 @@ msgstr "Навигация"
 
 msgid "Email: info@homebio.com"
 msgstr "Эл. почта: info@homebio.com"
+
+#: Notifications
+msgid "Notifications"
+msgstr "Уведомления"
+
+msgid "Updates about your favorite properties"
+msgstr "Обновления о вашей избранной недвижимости"
+
+msgid "Mark all as read"
+msgstr "Отметить все как прочитанное"
+
+msgid "Clear all"
+msgstr "Очистить все"
+
+msgid "Email notifications"
+msgstr "Email уведомления"
+
+msgid "Receive email when your favorite properties are updated"
+msgstr "Получать email когда ваша избранная недвижимость обновляется"
+
+msgid "New"
+msgstr "Новое"
+
+msgid "Mark as read"
+msgstr "Отметить как прочитанное"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "No notifications yet"
+msgstr "Пока нет уведомлений"
+
+msgid "When properties in your favorites are updated, you'll see notifications here."
+msgstr "Когда недвижимость в вашем избранном обновляется, вы увидите уведомления здесь."
+
+msgid "Notification marked as read"
+msgstr "Уведомление отмечено как прочитанное"
+
+msgid "All notifications marked as read"
+msgstr "Все уведомления отмечены как прочитанные"
+
+msgid "Notification deleted"
+msgstr "Уведомление удалено"
+
+msgid "All notifications deleted"
+msgstr "Все уведомления удалены"
+
+msgid "Email notifications enabled"
+msgstr "Email уведомления включены"
+
+msgid "Email notifications disabled"
+msgstr "Email уведомления отключены"
+
+msgid "Could not update notification"
+msgstr "Не удалось обновить уведомление"
+
+msgid "Could not delete notification"
+msgstr "Не удалось удалить уведомление"
+
+msgid "Invalid notification"
+msgstr "Неверное уведомление"
+
+msgid "[%1$s] Property Updated: %2$s"
+msgstr "[%1$s] Недвижимость обновлена: %2$s"
+
+msgid "Hello %s,"
+msgstr "Привет %s,"
+
+msgid "A property in your favorites has been updated: %s"
+msgstr "Недвижимость в вашем избранном обновлена: %s"
+
+msgid "Changes:"
+msgstr "Изменения:"
+
+msgid "View property: %s"
+msgstr "Посмотреть недвижимость: %s"
+
+msgid "Manage your notifications: %s"
+msgstr "Управлять уведомлениями: %s"
+
+msgid "Best regards,"
+msgstr "С уважением,"
+
+msgid "Just now"
+msgstr "Только что"
+
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d минуту назад"
+msgstr[1] "%d минуты назад"
+msgstr[2] "%d минут назад"
+
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d час назад"
+msgstr[1] "%d часа назад"
+msgstr[2] "%d часов назад"
+
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d день назад"
+msgstr[1] "%d дня назад"
+msgstr[2] "%d дней назад"

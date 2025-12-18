@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 /**
  * Define theme constants
  */
-define('HOMEBIO_VERSION', '1.0.15');
+define('HOMEBIO_VERSION', '1.0.16');
 define('HOMEBIO_DIR', get_template_directory());
 define('HOMEBIO_URI', get_template_directory_uri());
 
@@ -147,6 +147,7 @@ require_once HOMEBIO_DIR . '/inc/user-cabinet.php';
 require_once HOMEBIO_DIR . '/inc/oauth-integration.php';
 require_once HOMEBIO_DIR . '/inc/ultimate-member-integration.php';
 require_once HOMEBIO_DIR . '/inc/polylang-integration.php';
+require_once HOMEBIO_DIR . '/inc/notifications.php';
 
 /**
  * Custom excerpt length
