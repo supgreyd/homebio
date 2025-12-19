@@ -50,7 +50,7 @@
                             <span class="user-avatar">
                                 <?php echo homebio_get_avatar($current_user->ID, 32); ?>
                             </span>
-                            <span class="user-name"><?php echo esc_html($current_user->display_name); ?></span>
+                            <span class="user-name" data-user-display-name><?php echo esc_html($current_user->display_name); ?></span>
                             <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>

@@ -6,7 +6,7 @@
  * @module modules/cabinet-forms
  */
 
-import { $, on } from '../utils/dom.js';
+import { $, $$, on } from '../utils/dom.js';
 import { ajaxPost } from '../utils/ajax.js';
 import { showNotification } from '../utils/notification.js';
 
@@ -27,8 +27,34 @@ function initSettingsForm() {
 
     on(form, 'submit', async (e) => {
         e.preventDefault();
-        await submitForm(form, 'update_settings', 'cabinet_nonce');
+        const response = await submitForm(form, 'update_settings', 'cabinet_nonce');
+
+        // Update user name in UI if data is returned
+        if (response?.success && response.data?.user) {
+            updateUserDisplay(response.data.user);
+        }
     });
+}
+
+/**
+ * Update user display name in header and sidebar
+ *
+ * @param {Object} user - User data object
+ */
+function updateUserDisplay(user) {
+    const displayName = user.first_name || user.display_name;
+
+    // Update all elements with data-user-display-name attribute
+    $$('[data-user-display-name]').forEach((el) => {
+        el.textContent = displayName;
+    });
+
+    // Update email if changed
+    if (user.email) {
+        $$('[data-user-email]').forEach((el) => {
+            el.textContent = user.email;
+        });
+    }
 }
 
 /**
@@ -63,11 +89,13 @@ function initPasswordForm() {
  * @param {HTMLFormElement} form - Form element
  * @param {string} action - AJAX action name
  * @param {string} nonceField - Name of nonce field in form
+ * @returns {Object|null} Response object or null on error
  */
 async function submitForm(form, action, nonceField) {
     const submitBtn = form.querySelector('[type="submit"]');
     const messageEl = form.querySelector('.form-message');
     const originalText = submitBtn?.textContent;
+    let response = null;
 
     // Set loading state
     if (submitBtn) {
@@ -83,7 +111,7 @@ async function submitForm(form, action, nonceField) {
             data[key] = value;
         });
 
-        const response = await ajaxPost(action, data);
+        response = await ajaxPost(action, data);
 
         if (response.success) {
             showNotification(response.data.message, 'success');
@@ -107,6 +135,8 @@ async function submitForm(form, action, nonceField) {
             submitBtn.textContent = originalText;
         }
     }
+
+    return response;
 }
 
 export default { init };

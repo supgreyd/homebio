@@ -21,10 +21,10 @@ $notifications_count = homebio_get_unread_notifications_count($current_user->ID)
 <aside class="cabinet-sidebar">
     <div class="cabinet-user-info">
         <?php echo homebio_get_avatar($current_user->ID, 80); ?>
-        <div class="cabinet-user-name">
+        <div class="cabinet-user-name" data-user-display-name>
             <?php echo esc_html($first_name ?: $current_user->display_name); ?>
         </div>
-        <div class="cabinet-user-email">
+        <div class="cabinet-user-email" data-user-email>
             <?php echo esc_html($current_user->user_email); ?>
         </div>
     </div>

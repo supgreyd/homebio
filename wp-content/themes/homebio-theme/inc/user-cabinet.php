@@ -112,14 +112,26 @@ function homebio_ajax_update_settings() {
     // Update display name
     $first_name = get_user_meta($user_id, 'first_name', true);
     $last_name = get_user_meta($user_id, 'last_name', true);
-    if ($first_name || $last_name) {
+    $display_name = trim($first_name . ' ' . $last_name);
+
+    if ($display_name) {
         wp_update_user([
             'ID'           => $user_id,
-            'display_name' => trim($first_name . ' ' . $last_name),
+            'display_name' => $display_name,
         ]);
+    } else {
+        $user = get_userdata($user_id);
+        $display_name = $user->display_name;
     }
 
-    homebio_ajax_success(__('Settings saved successfully', 'homebio'));
+    // Return updated user data for UI refresh
+    homebio_ajax_success(__('Settings saved successfully', 'homebio'), [
+        'user' => [
+            'display_name' => $display_name,
+            'first_name'   => $first_name,
+            'email'        => get_userdata($user_id)->user_email,
+        ],
+    ]);
 }
 add_action('wp_ajax_update_settings', 'homebio_ajax_update_settings');
 
