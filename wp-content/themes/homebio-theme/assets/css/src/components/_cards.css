@@ -1,0 +1,278 @@
+/**
+ * Cards
+ *
+ * Property cards, favorite cards, and other card components.
+ */
+
+/* Property Cards Grid */
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl) 0;
+}
+
+/* Property Card */
+.property-card {
+    position: relative;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.property-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.property-card__image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.property-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.property-card:hover .property-card__image img {
+    transform: scale(1.05);
+}
+
+.property-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--color-gray-200);
+    color: var(--color-gray-400);
+}
+
+/* Favorite Button on Card */
+.property-card__favorite {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.property-card__favorite:hover {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+
+.property-card__favorite.is-active {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+
+/* Card Content */
+.property-card__content {
+    padding: var(--spacing-lg);
+}
+
+.property-card__price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.property-card__title {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.property-card__location {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-gray-500);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.property-card__details {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.property-card__detail {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+/* Favorite Cards (Cabinet) */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.favorite-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.favorite-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.favorite-card-image {
+    position: relative;
+    aspect-ratio: 16/10;
+    background: var(--color-gray-100);
+}
+
+.favorite-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorite-card-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: var(--color-gray-400);
+}
+
+.favorite-remove {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-white);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-500);
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.favorite-remove:hover {
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+
+.favorite-card-content {
+    padding: var(--spacing-md);
+}
+
+.favorite-card-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 var(--spacing-sm);
+}
+
+.favorite-card-content h3 a {
+    color: var(--color-gray-900);
+}
+
+.favorite-card-content h3 a:hover {
+    color: var(--color-primary);
+}
+
+.favorite-card-price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.favorite-card-location {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--color-gray-500);
+}
+
+/* Security Cards */
+.security-card {
+    background: var(--color-gray-500);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.security-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin: 0 0 var(--spacing-md);
+}
+
+.security-card p {
+    color: var(--color-gray-600);
+    margin: 0 0 var(--spacing-lg);
+}
+
+.security-card.danger {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.security-card .cabinet-form {
+    margin-top: var(--spacing-lg);
+}
+
+.security-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+}
+
+.security-card-content {
+    flex: 1;
+}
+
+.security-status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.security-status.connected {
+    color: var(--color-success);
+}

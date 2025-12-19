@@ -1,0 +1,137 @@
+/**
+ * Single Property
+ *
+ * Single property page styles.
+ */
+
+.property-single {
+    padding: var(--spacing-xl) 0;
+}
+
+.property-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.property-header h1 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.property-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    color: var(--color-gray-600);
+}
+
+/* Property Gallery */
+.property-gallery {
+    margin-bottom: var(--spacing-xl);
+}
+
+.property-gallery__main {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.property-gallery__main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.property-gallery__thumbs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--spacing-sm);
+}
+
+.property-gallery__thumb {
+    aspect-ratio: 16 / 10;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.property-gallery__thumb:hover,
+.property-gallery__thumb.active {
+    opacity: 1;
+}
+
+/* Property Content Layout */
+.property-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+.property-description h2,
+.property-features h2,
+.property-sidebar h3 {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Property Features Grid */
+.property-features__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.property-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--color-gray-100);
+    border-radius: var(--border-radius);
+}
+
+.property-feature__value {
+    font-weight: 600;
+    color: var(--color-gray-900);
+}
+
+.property-feature__label {
+    font-size: 0.875rem;
+    color: var(--color-gray-500);
+}
+
+/* Property Sidebar */
+.property-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.property-price-card {
+    background: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.property-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.property-price-card .btn {
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+}
+
+@media (max-width: 768px) {
+    .property-content {
+        grid-template-columns: 1fr;
+    }
+
+    .property-sidebar {
+        position: static;
+    }
+}

@@ -1,0 +1,40 @@
+/**
+ * Reset & Base Styles
+ *
+ * Normalize browser defaults and set base element styles.
+ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: var(--font-size-base);
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    line-height: var(--line-height-base);
+    color: var(--color-gray-800);
+    background-color: var(--color-white);
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

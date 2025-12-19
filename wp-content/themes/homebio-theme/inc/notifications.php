@@ -200,13 +200,7 @@ function homebio_capture_property_meta_on_edit() {
         return;
     }
 
-    // Check if we already stored this (avoid multiple stores)
-    $stored = get_transient('homebio_property_original_' . $post_id);
-    if ($stored) {
-        return;
-    }
-
-    // Store the original data
+    // Store the original data (always refresh on page load)
     $original_data = [
         'title' => $post->post_title,
         'price' => get_post_meta($post_id, '_property_price', true),

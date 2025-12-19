@@ -1,0 +1,57 @@
+/**
+ * Footer
+ *
+ * Site footer styles.
+ */
+
+.site-footer {
+    background-color: var(--color-gray-900);
+    color: var(--color-gray-300);
+    padding: var(--spacing-2xl) 0;
+    margin-top: var(--spacing-2xl);
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.site-footer h4 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+}
+
+.site-footer a {
+    color: var(--color-gray-400);
+}
+
+.site-footer a:hover {
+    color: var(--color-white);
+}
+
+.footer-bottom {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-gray-700);
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.footer-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-navigation li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-navigation a {
+    text-decoration: none;
+}

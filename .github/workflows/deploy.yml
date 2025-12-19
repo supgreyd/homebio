@@ -8,12 +8,29 @@ on:
 
 jobs:
   deploy:
-    name: Deploy via FTP
+    name: Build and Deploy via FTP
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: wp-content/themes/homebio-theme/package-lock.json
+
+      - name: Install dependencies
+        working-directory: wp-content/themes/homebio-theme
+        run: npm ci
+
+      - name: Build assets
+        working-directory: wp-content/themes/homebio-theme
+        run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Install lftp
         run: sudo apt-get install -y lftp
@@ -27,6 +44,16 @@ jobs:
             set net:max-retries 3;
             set net:reconnect-interval-base 5;
             open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }};
-            mirror --reverse --delete --verbose --exclude .git/ --exclude .DS_Store --exclude README.md ./wp-content/themes/homebio-theme/ ${{ secrets.FTP_SERVER_DIR }};
+            mirror --reverse --delete --verbose \
+              --exclude .git/ \
+              --exclude .DS_Store \
+              --exclude README.md \
+              --exclude node_modules/ \
+              --exclude assets/css/src/ \
+              --exclude assets/js/src/ \
+              --exclude package.json \
+              --exclude package-lock.json \
+              --exclude postcss.config.js \
+              ./wp-content/themes/homebio-theme/ ${{ secrets.FTP_SERVER_DIR }};
             quit
           "

@@ -1,0 +1,35 @@
+/**
+ * Home Page
+ *
+ * Homepage hero and featured sections.
+ */
+
+.hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    padding: var(--spacing-2xl) 0;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.hero__content {
+    max-width: 600px;
+}
+
+.hero__content h1 {
+    color: var(--color-white);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.hero__content p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: var(--spacing-xl);
+}
+
+.no-favorites {
+    text-align: center;
+    padding: var(--spacing-2xl);
+}

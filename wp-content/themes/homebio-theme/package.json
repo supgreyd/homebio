@@ -1,0 +1,30 @@
+{
+  "name": "homebio-theme",
+  "version": "1.1.0",
+  "description": "HomeBio WordPress Theme",
+  "private": true,
+  "scripts": {
+    "build:css": "postcss assets/css/src/main.css -o style.css",
+    "build:js": "esbuild assets/js/src/main.js --bundle --minify --sourcemap --outfile=assets/js/main.min.js --target=es2018",
+    "build:js:dev": "esbuild assets/js/src/main.js --bundle --outfile=assets/js/main.min.js --target=es2018",
+    "build": "npm run build:css && npm run build:js",
+    "watch:css": "postcss assets/css/src/main.css -o style.css --watch",
+    "watch:js": "esbuild assets/js/src/main.js --bundle --outfile=assets/js/main.min.js --target=es2018 --watch",
+    "watch": "npm-run-all --parallel watch:css watch:js",
+    "dev": "npm run watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-preset-env": "^9.3.0",
+    "cssnano": "^6.0.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

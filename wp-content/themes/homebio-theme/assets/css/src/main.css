@@ -1,0 +1,43 @@
+/**
+ * HomeBio Theme - Main Stylesheet
+ *
+ * This file imports all CSS partials in the correct order.
+ * Use a build tool (PostCSS, Sass, etc.) to compile into style.css
+ *
+ * @package HomeBio
+ * @version 1.1.0
+ */
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@import 'base/_variables.css';
+@import 'base/_reset.css';
+@import 'base/_typography.css';
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+@import 'components/_buttons.css';
+@import 'components/_forms.css';
+@import 'components/_cards.css';
+@import 'components/_modals.css';
+@import 'components/_notifications.css';
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+@import 'layout/_container.css';
+@import 'layout/_header.css';
+@import 'layout/_footer.css';
+@import 'layout/_cabinet.css';
+
+/* ==========================================================================
+   Pages
+   ========================================================================== */
+@import 'pages/_home.css';
+@import 'pages/_property-archive.css';
+@import 'pages/_property-single.css';
+@import 'pages/_login.css';
+@import 'pages/_ultimate-member.css';
+@import 'pages/_responsive.css';

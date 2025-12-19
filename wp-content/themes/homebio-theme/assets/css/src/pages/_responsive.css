@@ -1,0 +1,58 @@
+/**
+ * Responsive Styles
+ *
+ * Media queries for responsive design.
+ */
+
+@media (max-width: 1024px) {
+    .main-navigation {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .user-dropdown__toggle {
+        padding: var(--spacing-xs);
+    }
+
+    .dropdown-arrow {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+
+    .hero__content h1 {
+        font-size: 2rem;
+    }
+
+    .header-actions .btn {
+        display: none;
+    }
+
+    .header-actions .language-switcher {
+        display: none;
+    }
+
+    .user-dropdown {
+        display: none;
+    }
+
+    .cabinet-nav ul {
+        display: flex;
+        overflow-x: auto;
+        gap: var(--spacing-sm);
+    }
+
+    .cabinet-nav li {
+        margin-bottom: 0;
+    }
+}

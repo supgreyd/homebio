@@ -513,6 +513,12 @@
 
     /**
      * Show notification toast
+     *
+     * Uses CSS classes defined in style.css for styling.
+     * No inline styles needed - all styles are in the stylesheet.
+     *
+     * @param {string} message - The notification message
+     * @param {string} type - Notification type: 'success', 'error', 'warning', 'info'
      */
     function showNotification(message, type = 'info') {
         // Remove existing notifications
@@ -521,57 +527,17 @@
             existing.remove();
         }
 
-        // Create notification element
+        // Create notification element with CSS classes (styles defined in style.css)
         const notification = document.createElement('div');
         notification.className = `homebio-notification homebio-notification--${type}`;
         notification.textContent = message;
 
-        // Add styles
-        notification.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            z-index: 9999;
-            animation: slideIn 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        `;
-
-        // Set background color based on type
-        const colors = {
-            success: '#22c55e',
-            error: '#ef4444',
-            warning: '#f59e0b',
-            info: '#3b82f6'
-        };
-        notification.style.backgroundColor = colors[type] || colors.info;
-
-        // Add animation keyframes if not already added
-        if (!document.getElementById('homebio-notification-styles')) {
-            const style = document.createElement('style');
-            style.id = 'homebio-notification-styles';
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOut {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
         // Add to DOM
         document.body.appendChild(notification);
 
-        // Remove after delay
+        // Remove after delay with slide-out animation
         setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease';
+            notification.classList.add('homebio-notification--slide-out');
             setTimeout(() => {
                 notification.remove();
             }, 300);
