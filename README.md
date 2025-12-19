@@ -18,6 +18,7 @@ A modern, multilingual WordPress theme for real estate property browsing with us
 - WordPress 6.0+
 - PHP 8.1+
 - MySQL 8.0+ or MariaDB
+- Node.js 20+ (for development)
 
 ## Installation
 
@@ -37,7 +38,15 @@ A modern, multilingual WordPress theme for real estate property browsing with us
 ln -s ~/path/to/homebio/wp-content/themes/homebio-theme ~/Local\ Sites/homebio/app/public/wp-content/themes/homebio-theme
 ```
 
-4. Activate the theme in WordPress admin
+4. Install dependencies and build:
+
+```bash
+cd wp-content/themes/homebio-theme
+npm install
+npm run build
+```
+
+5. Activate the theme in WordPress admin
 
 ## Recommended Plugins
 
@@ -50,7 +59,7 @@ ln -s ~/path/to/homebio/wp-content/themes/homebio-theme ~/Local\ Sites/homebio/a
 
 ```
 wp-content/themes/homebio-theme/
-├── style.css                 # Main styles
+├── style.css                 # Compiled CSS (generated)
 ├── functions.php             # Theme setup & configuration
 ├── header.php                # Site header
 ├── footer.php                # Site footer with navigation
@@ -63,8 +72,18 @@ wp-content/themes/homebio-theme/
 ├── single-property.php       # Single property view
 ├── archive-property.php      # Property listings
 ├── template-parts/
-│   └── property-card.php     # Property card component
+│   ├── property-card.php     # Property card component
+│   └── cabinet/              # User cabinet components
+│       ├── sidebar.php       # Cabinet navigation
+│       ├── tab-settings.php  # Profile settings form
+│       ├── tab-security.php  # Password & account deletion
+│       ├── tab-favorites.php # Favorites grid
+│       ├── tab-notifications.php # Notifications list
+│       ├── empty-state.php   # Reusable empty state
+│       └── modal-delete-account.php # Delete confirmation
 ├── inc/
+│   ├── ajax-helpers.php      # AJAX helper functions
+│   ├── icons.php             # SVG icon library
 │   ├── custom-post-types.php # Property post type
 │   ├── favorites.php         # Favorites functionality
 │   ├── user-cabinet.php      # Cabinet AJAX handlers
@@ -73,49 +92,54 @@ wp-content/themes/homebio-theme/
 │   ├── polylang-integration.php # Language switcher
 │   └── ultimate-member-integration.php
 ├── assets/
+│   ├── css/
+│   │   └── src/              # Source CSS modules
+│   │       ├── main.css      # Entry point
+│   │       ├── base/         # Variables, reset, typography
+│   │       ├── components/   # Buttons, forms, cards, modals
+│   │       ├── layout/       # Container, header, footer, cabinet
+│   │       └── pages/        # Page-specific styles
 │   └── js/
-│       └── main.js           # Frontend JavaScript
-└── languages/
-    ├── bg_BG.po/.mo          # Bulgarian
-    ├── ru_RU.po/.mo          # Russian
-    ├── uk.po/.mo             # Ukrainian
-    └── homebio.pot           # Translation template
+│       ├── main.js           # Compiled JS (generated)
+│       └── src/              # Source JS modules
+│           ├── main.js       # Entry point
+│           ├── utils/        # Ajax, notification, DOM helpers
+│           └── modules/      # Feature modules
+├── languages/
+│   ├── bg_BG.po/.mo          # Bulgarian
+│   ├── ru_RU.po/.mo          # Russian
+│   ├── uk.po/.mo             # Ukrainian
+│   └── homebio.pot           # Translation template
+├── package.json              # npm dependencies & scripts
+└── postcss.config.js         # PostCSS configuration
 ```
 
-## Configuration
-
-### WordPress Settings
-
-1. **Permalinks**: Settings → Permalinks → "Post name"
-2. **Homepage**: Settings → Reading → Static page
-3. **Create Pages**: Login, Register, User Cabinet (assign respective templates)
-
-### Google OAuth Setup
-
-1. Install "Nextend Social Login" plugin
-2. Create Google OAuth credentials at [Google Cloud Console](https://console.cloud.google.com/)
-3. Configure the plugin with Client ID and Secret
-
-## Deployment
-
-Automatic deployment via GitHub Actions on push to `main` branch.
-
-### Setup GitHub Secrets
-
-Go to Repository → Settings → Secrets → Actions and add:
-
-| Secret | Description |
-|--------|-------------|
-| `FTP_SERVER` | FTP hostname |
-| `FTP_USERNAME` | FTP username |
-| `FTP_PASSWORD` | FTP password |
-| `FTP_SERVER_DIR` | Remote path (e.g., `/public_html/wp-content/themes/homebio-theme/`) |
-
-### Manual Deployment
-
-You can also trigger deployment manually from GitHub → Actions → "Deploy to Hostia.net" → Run workflow.
-
 ## Development
+
+### Build System
+
+The theme uses PostCSS for CSS processing and esbuild for JavaScript bundling.
+
+```bash
+# Install dependencies
+npm install
+
+# Build for production (minified)
+npm run build
+
+# Watch for changes during development
+npm run dev
+```
+
+### Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run build` | Build CSS and JS for production |
+| `npm run build:css` | Build CSS only |
+| `npm run build:js` | Build JS only |
+| `npm run dev` | Watch mode for development |
+| `npm run watch` | Alias for dev |
 
 ### Adding Translations
 
@@ -135,6 +159,44 @@ Properties use these meta keys:
 - `_property_bathrooms` - Number of bathrooms
 - `_property_address` - Full address
 - `_property_location` - City/region
+
+## Configuration
+
+### WordPress Settings
+
+1. **Permalinks**: Settings → Permalinks → "Post name"
+2. **Homepage**: Settings → Reading → Static page
+3. **Create Pages**: Login, Register, User Cabinet (assign respective templates)
+
+### Google OAuth Setup
+
+1. Install "Nextend Social Login" plugin
+2. Create Google OAuth credentials at [Google Cloud Console](https://console.cloud.google.com/)
+3. Configure the plugin with Client ID and Secret
+
+## Deployment
+
+Automatic deployment via GitHub Actions on push to `main` branch. The workflow:
+
+1. Checks out code
+2. Installs Node.js dependencies
+3. Builds CSS and JS for production
+4. Deploys via FTP (excluding source files)
+
+### Setup GitHub Secrets
+
+Go to Repository → Settings → Secrets → Actions and add:
+
+| Secret | Description |
+|--------|-------------|
+| `FTP_SERVER` | FTP hostname |
+| `FTP_USERNAME` | FTP username |
+| `FTP_PASSWORD` | FTP password |
+| `FTP_SERVER_DIR` | Remote path (e.g., `/public_html/wp-content/themes/homebio-theme/`) |
+
+### Manual Deployment
+
+You can also trigger deployment manually from GitHub → Actions → "Deploy to Hostia.net" → Run workflow.
 
 ## License
 
